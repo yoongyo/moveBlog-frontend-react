@@ -7,13 +7,15 @@ import { Link } from 'react-router-dom';
 import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
-
+import { Category } from '../component/category';
+import Header from '../component/header';
 
 export const PostCreate = () => {
 
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
     const [content, setContent] = useState<string>('');
     const [title, setTitle] = useState<string>('');
+    const [category, setCategory] = useState<[]>([]);
     let history = useHistory();
 
     
@@ -37,16 +39,24 @@ export const PostCreate = () => {
 
 
     return (
-        <div className="max-w-4xl mx-auto py-12 px-6">
+        <>
+        <Header/>
+        <div className="max-w-4xl mx-auto pt-12 px-6">
             <form>
-                <div className="py-12">
-                    <input 
-                        className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
-                        placeholder="제목" 
-                        onChange={onChangeTitle}
-                    />
+                <div className="grid grid-cols-3 gap-4 pt-12">
+                    <div className="col-span-2">
+                        <input 
+                            className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
+                            placeholder="제목" 
+                            onChange={onChangeTitle}
+                        />
+                    </div>
+                    <div className="col-span-1 flex flex-row">
+                        <Category/>
+                    </div>
                 </div>
-                <div>
+
+                <div className="pt-12"> 
                     <Editor
                         placeholder="본문을 적어주세요"
                         editorState={editorState}
@@ -82,5 +92,6 @@ export const PostCreate = () => {
                 </div>
             </form>
         </div>
+        </>
     )
 }

@@ -19,7 +19,8 @@ export const Main = () => {
     }, [])
 
     return (
-        <div>
+        <>
+            <Header/>
             <div className="max-w-4xl mx-auto my-8">
             </div>
             <div className="max-w-4xl mx-auto">
@@ -27,6 +28,6 @@ export const Main = () => {
                     <PostListComponent/>
                 ))}
             </div>
-        </div>
+        </>
     )
 }
