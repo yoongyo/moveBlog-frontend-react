@@ -14,7 +14,8 @@ export const Main = () => {
         .then(res => res.json())
         .then(json => {
             console.log(json);
-            setPosts(json.reverse());
+            console.log(json.content);
+            // setPosts(json.reverse());
         })
     }, [])
 

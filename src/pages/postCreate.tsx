@@ -9,13 +9,15 @@ import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import { Category } from '../component/category';
 import Header from '../component/header';
+import { useRecoilState } from 'recoil';
+import { CategoryState } from '../state/recoil';
+
 
 export const PostCreate = () => {
-
+    const [categoryState, setCategoryState] = useRecoilState(CategoryState);
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
     const [content, setContent] = useState<string>('');
     const [title, setTitle] = useState<string>('');
-    const [category, setCategory] = useState<[]>([]);
     let history = useHistory();
 
     
@@ -25,11 +27,12 @@ export const PostCreate = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({title: title, content: content})
+            body: JSON.stringify({title: title, content: content, categoryId: Number(categoryState.categoryId)})
         })
-        .then(res => {
-            console.log(res)
-            history.push('/')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            history.push('posts/'+ data)
         })
     }
 
