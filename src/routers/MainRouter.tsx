@@ -14,7 +14,7 @@ export const MainRouter = () => {
                 <Route path="/create" component={PostCreate}/>
                 <Route path="/" exact component={Main}/>
                 <Route path="/addCategory" component={AddCategory}/>
-                <Route path="/:post_id/" exact component={PostDetail}/>
+                <Route path="/posts/:post_id" component={PostDetail}/>
             </Switch>
         </Router>
     )

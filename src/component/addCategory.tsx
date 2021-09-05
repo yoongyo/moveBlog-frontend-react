@@ -1,17 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { CategoryListState, CategoryState } from '../state/recoil';
-import { useEffect } from 'react-router/node_modules/@types/react';
+import { CategoryListState } from '../state/recoil';
 
 export const AddCategory  = () => {
     const [categoryList, setCategoryList] = useRecoilState<Object[]>(CategoryListState);
     const [categoryName, setCategoryName] = useState("");
-    const [fuck, setFuck ] = useState<[]>([]);
     let history = useHistory();
-
-
 
     const onClick = () => {
         fetch(BACKEND_URL + 'category/', {

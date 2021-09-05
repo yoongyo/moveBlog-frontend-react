@@ -9,15 +9,13 @@ import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import { Category } from '../component/category';
 import Header from '../component/header';
-import { useRecoilState } from 'recoil';
-import { CategoryState } from '../state/recoil';
 
 
 export const PostCreate = () => {
-    const [categoryState, setCategoryState] = useRecoilState(CategoryState);
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
     const [content, setContent] = useState<string>('');
     const [title, setTitle] = useState<string>('');
+    const [category, setCategory] = useState<string>("");
     let history = useHistory();
 
     
@@ -27,17 +25,21 @@ export const PostCreate = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({title: title, content: content, categoryId: Number(categoryState.categoryId)})
+            body: JSON.stringify({title: title, content: content, categoryId: Number(category)})
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            history.push('posts/'+ data)
+            console.log(data.id)
+            history.push('posts/'+ data.id)
         })
     }
 
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
+    }
+
+    const getCategory = (id:string) => {
+        setCategory(id);
     }
 
 
@@ -55,7 +57,7 @@ export const PostCreate = () => {
                         />
                     </div>
                     <div className="col-span-1 flex flex-row">
-                        <Category/>
+                        <Category getCategory={getCategory}/>
                     </div>
                 </div>
 
@@ -75,7 +77,6 @@ export const PostCreate = () => {
                                     )
                                 )
                             );
-                            console.log(content);
                         }}
                         toolbar={{
                             options: [

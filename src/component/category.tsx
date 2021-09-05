@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import plusIcon from '../img/plus_icon.svg';
 import { useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { CategoryListState, CategoryState } from '../state/recoil';
+import { CategoryListState } from '../state/recoil';
 
-export const Category = () => {
+export const Category = (props:any) => {
     const [categoryList, setCategoryList] = useRecoilState<any[]>(CategoryListState);
-    const [categoryState, setCategoryState] = useRecoilState(CategoryState);
-    const [selectOption, setSelectOption] = useState(null);
+    const [selectOption, setSelectOption] = useState<null|Number>(null);
     let history = useHistory();
+
+    const mounted = useRef(false);
 
     useEffect(() => {
         fetch(BACKEND_URL + 'category/', {
@@ -19,8 +20,6 @@ export const Category = () => {
         .then(data => {
             setCategoryList(data);
         })
-        // console.log(categoryList[-1])
-        // setSelectOption(categoryList[-1]["id"]);
     }, [])
 
 
@@ -30,11 +29,7 @@ export const Category = () => {
     }
 
     const onChange = (e : React.ChangeEvent<HTMLSelectElement>) => {   
-        // categoryState는 readOnly 객체이기 때문에 Object.freeze 함수로 쓰기 전용으로 바꿔준다.
-        let category = Object.freeze(categoryState);
-        category = {"categoryId": e.target.value}
-        setCategoryState(category);
-        console.log(categoryState)     
+        props.getCategory(e.target.value);
     }
 
     

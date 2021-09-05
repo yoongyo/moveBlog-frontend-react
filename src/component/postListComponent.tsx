@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { DateFormat } from './dateFormat';
 
 
 
-export const PostListComponent = () => {
+export const PostListComponent = ({post}:any) => {
+
+    useEffect(() => {
+        console.log(post.id);
+    })
+
     return (
         <div className="border-b pb-12 mb-10 mx-4 sm:px-0">
-            <a href="https://www.naver.com">
-                <div className="mb-5">Aug.20.2021 정윤교</div>
-                <div>
-                    <h1 className="font-extrabold text-2xl mb-2">우아한테크러닝 4기 후기</h1>
-                    <h2>내외부 개발자가 함께하는 교육 "우아한테크러닝"의 생생한 후기를 전해드립니다.</h2>
+            <Link to={{
+                pathname:'posts/'+`${post.id}`,
+            }}>
+                <div className="mb-5">
+                    <DateFormat datetime={post.createdDate}/> 
+                    <h1>정윤교</h1>
                 </div>
-            </a>
+                <div>
+                    <h1 className="font-extrabold text-2xl mb-2">{post.title}</h1>
+                    <div className="w-full" dangerouslySetInnerHTML={{ __html: post.content }} style={{wordBreak: 'break-word'}}/>
+                </div>
+            </Link>
         </div>
     )
 }

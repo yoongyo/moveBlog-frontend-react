@@ -5,17 +5,16 @@ import Logo from '../img/logo.png';
 import { BACKEND_URL } from '../api/backendURL';
 
 export const Main = () => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState<[]>([]);
     
     useEffect(() => {
         fetch(BACKEND_URL + '/posts/', {
             method: 'GET'
         })
         .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            console.log(json.content);
-            // setPosts(json.reverse());
+        .then(data => {
+            console.log(data.content.reverse());
+            setPosts(data.content);
         })
     }, [])
 
@@ -25,8 +24,8 @@ export const Main = () => {
             <div className="max-w-4xl mx-auto my-8">
             </div>
             <div className="max-w-4xl mx-auto">
-                {posts.map((item, index) => (
-                    <PostListComponent/>
+                {posts.map((post, index) => (
+                    <PostListComponent post={post}/>
                 ))}
             </div>
         </>
