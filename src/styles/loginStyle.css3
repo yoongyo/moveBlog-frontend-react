@@ -1,0 +1,4 @@
+
+.login_div {
+    background: linear-gradient(135deg, #688fed 0%, #475ca9 45%, #688fed 100%)
+}
