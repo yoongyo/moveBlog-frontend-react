@@ -11,6 +11,9 @@ const DrawerStyle:React.CSSProperties = {
 
 
 export const DrawerNavigation = () => {
+
+    const login = localStorage.getItem('account')
+
     const [isOpen, setIsOpen] = useState(false);
     const toggleDrawer = () => {
         setIsOpen((prevState) => !prevState)
@@ -24,6 +27,11 @@ export const DrawerNavigation = () => {
                 </div>
                 <nav className="text-white">
                     <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/create">Create Post</Link>
+                    {login ? (
+                        <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/profile">Profile</Link>
+                    ): (
+                        <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/login">Login</Link>
+                    )}
                 </nav>
             </Drawer>
         </>

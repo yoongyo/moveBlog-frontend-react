@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from 'draftjs-to-html';
@@ -18,6 +18,12 @@ export const PostCreate = () => {
     const [category, setCategory] = useState<string>("");
     let history = useHistory();
 
+
+    useEffect(() => {
+        if (!localStorage.getItem('users')) {
+            history.push('login')
+        }
+    }, [])
     
     const onClick = () => {
         fetch(BACKEND_URL + 'posts/', {
