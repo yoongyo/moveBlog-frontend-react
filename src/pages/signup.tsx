@@ -1,14 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import  '../styles/loginStyle.css3'
+import React from 'react';
+import { SignupForm } from '../component/signupForm';
 import Logo from '../img/moveLogo.png';
-import { LoginForm } from '../component/loginForm';
-import { BACKEND_URL } from '../api/backendURL';
 
 
 
-export const Login = () => {
-
-    
+export const Signup = () => {
     return (
         <>
             <div style={{background: "linear-gradient(135deg, #688fed 0%, #475ca9 45%, #688fed 100%)"}} className="pt-10 h-60 z-0 relative">
@@ -17,7 +13,7 @@ export const Login = () => {
                 </div>
             </div>
             <div className=" -top-12 z-20 relative">
-                <LoginForm/>
+                <SignupForm/>
             </div>
         </>
     )

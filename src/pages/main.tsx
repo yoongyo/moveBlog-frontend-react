@@ -3,6 +3,7 @@ import Header from '../component/header';
 import { PostListComponent } from '../component/postListComponent';
 import Logo from '../img/logo.png';
 import { BACKEND_URL } from '../api/backendURL';
+import { Footer } from '../component/footer';
 
 export const Main = () => {
     const [posts, setPosts] = useState<[]>([]);
@@ -21,13 +22,14 @@ export const Main = () => {
     return (
         <>
             <Header/>
-            <div className="max-w-4xl mx-auto my-8">
+            <div className="max-w-4xl min-h-screen mx-auto my-8">
             </div>
             <div className="max-w-4xl mx-auto">
                 {posts.map((post, index) => (
                     <PostListComponent post={post}/>
                 ))}
             </div>
+            <Footer/>
         </>
     )
 }
