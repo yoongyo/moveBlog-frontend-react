@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, lighten, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,6 +19,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PlusIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom';
+
+
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    head:{
+        fontSize: 20,
+        color: "#73879C",
+    },
+    body: {
+        fontSize: 15,
+        color: "#73879C",
+    },
+  }),
+)(TableCell);
 
 interface Data {
   calories: number;
@@ -205,11 +220,15 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Add Post">
-          <IconButton aria-label="filter list">
-            <PlusIcon />
-          </IconButton>
-        </Tooltip>
+        // 여기 부분 수정
+        <Link to="/admin/post/add">
+            <Tooltip title="Add Post">
+            <IconButton aria-label="filter list">
+                <PlusIcon/>
+            </IconButton>
+            </Tooltip>
+        </Link>
+
       )}
     </Toolbar>
   );
@@ -259,6 +278,8 @@ export const AdminTable = () => {
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.name);
+      console.log(newSelecteds);
+
       setSelected(newSelecteds);
       return;
     }
@@ -332,26 +353,27 @@ export const AdminTable = () => {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                    //   onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <StyledTableCell padding="checkbox">
                         <Checkbox
+                          onClick={(event) => handleClick(event, row.name)}
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell component="th" id={labelId} scope="row" padding="none"> 
+                        <Link to="/hah"><p className=" hover:text-blue-900">{row.name}</p></Link>
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                      <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                      <StyledTableCell align="right">{row.protein}</StyledTableCell>
                     </TableRow>
                   );
                 })}

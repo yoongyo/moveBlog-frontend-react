@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ProSidebar, Menu, SubMenu, MenuItem} from 'react-pro-sidebar';
+import {ProSidebar, Menu, SubMenu, MenuItem, SidebarContent} from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import '../../styles/sidebar/custom.scss';
 
@@ -9,26 +9,26 @@ export const AdminNav = ({collapsed}:any) => {
     return (
         <div className="min-h-screen">
             <ProSidebar width="230px" collapsed={collapsed}>
-                <h1>ADMIN</h1>
                 <Menu iconShape="square">
-                    <SubMenu title="Componenets">
-                        <MenuItem>Component1</MenuItem>
-                    </SubMenu>
-                </Menu>
-                <Menu iconShape="square">
-                    <SubMenu title="Componenets">
-                        <MenuItem>
-                            <Link to="/admin/test1">Component1</Link>
-                        </MenuItem>
-                    </SubMenu>
-                </Menu>
-                <Menu iconShape="square">
-                    <SubMenu title="Componenets">
+                    <SubMenu title="DB 관리">
                         <MenuItem>                            
-                            <Link to="/admin/test2">Component1</Link>
+                            <Link to="/admin/test2">Posts</Link>
+                        </MenuItem>
+                        <MenuItem>                            
+                            <Link to="/admin/test2">Categories</Link>
+                        </MenuItem>
+                        <MenuItem>                            
+                            <Link to="/admin/test2">Users</Link>
                         </MenuItem>
                     </SubMenu>
                 </Menu>
+                <SidebarContent>
+                    <Menu iconShape="circle">
+                        <MenuItem>
+                            <Link to="/">메인 페이지로</Link>
+                        </MenuItem>
+                    </Menu>
+                </SidebarContent>
             </ProSidebar>
         </div>
     )
