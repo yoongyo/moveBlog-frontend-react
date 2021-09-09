@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ProSidebar, Menu, SubMenu, MenuItem} from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
-import '../styles/sidebar/custom.scss';
+import '../../styles/sidebar/custom.scss';
 
 
 export const AdminNav = ({collapsed}:any) => {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { AdminContent } from '../component/adminContent';
-import { AdminNav } from '../component/adminNav';
+import { AdminContent } from '../component/admin/adminContent';
+import { AdminNav } from '../component/admin/adminNav';
 
 
 export const Admin = () => {

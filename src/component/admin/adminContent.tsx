@@ -2,8 +2,9 @@ import React, {useEffect} from 'react';
 
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../styles/fontawesome.css';
+import '../../styles/fontawesome.css';
 import { useHistory } from 'react-router-dom';
+import { AdminTable } from './adminTable';
 
 export const AdminContent = ({handleCollapsedChange}:any) => {
 
@@ -25,8 +26,8 @@ export const AdminContent = ({handleCollapsedChange}:any) => {
                         color="#5A738E"/>
                 </button>
             </div>
-            <div className="w-full h-full bg-secondary">
-
+            <div className="w-full bg-secondary p-6">
+                <AdminTable/>
             </div>
         </div>
     )
