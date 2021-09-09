@@ -30,6 +30,7 @@ export const PostCreate = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': String(localStorage.getItem("token"))
             },
             body: JSON.stringify({title: title, content: content, categoryId: Number(category)})
         })

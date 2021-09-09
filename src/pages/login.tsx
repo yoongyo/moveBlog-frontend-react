@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import  '../styles/loginStyle.css3'
 import Logo from '../img/moveLogo.png';
 import { LoginForm } from '../component/loginForm';
-import { BACKEND_URL } from '../api/backendURL';
 
 
 
 export const Login = () => {
-
     
     return (
         <>

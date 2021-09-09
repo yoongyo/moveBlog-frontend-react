@@ -6,7 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const DrawerStyle:React.CSSProperties = {
-    'backgroundColor': '#334257'
+    'backgroundColor': '#2A3F54'
 }
 
 

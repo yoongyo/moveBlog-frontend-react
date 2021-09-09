@@ -19,6 +19,7 @@
     "@types/react-draft-wysiwyg": "^1.13.3",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.8",
+    "@types/sass": "^1.16.1",
     "autoprefixer": "^10.3.3",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
@@ -29,15 +30,19 @@
     "react-draft-wysiwyg": "^1.14.7",
     "react-facebook": "^8.1.4",
     "react-modern-drawer": "^0.1.1",
+    "react-pro-sidebar": "^0.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "recoil": "^0.4.1",
+    "sass": "^1.39.0",
     "tailwindcss": "^2.2.7",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "tailwind:prodbuild": "NODE_ENV=production npm run tailwind:build",
+    "tailwind:build": "tailwind build ./src/styles/tailwind.css -o ./src/styles/styles.css",
+    "start": "npm run tailwind:build & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
