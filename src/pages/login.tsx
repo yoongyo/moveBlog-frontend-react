@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Logo from '../img/moveLogo.png';
-import { LoginForm } from '../component/loginForm';
+import { LoginForm } from '../component/login/loginForm';
 
 
 

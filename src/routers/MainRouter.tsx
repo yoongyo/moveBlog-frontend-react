@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { AddCategory } from '../component/addCategory';
-import Header from '../component/header';
+import { AddCategory } from '../component/category/addCategory';
+import Header from '../component/layout/header';
 import { Admin } from '../pages/admin';
 import { Login } from '../pages/login';
 import { Main } from '../pages/main';

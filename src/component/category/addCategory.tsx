@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { BACKEND_URL } from '../api/backendURL';
+import { BACKEND_URL } from '../../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { CategoryListState } from '../state/recoil';
+import { CategoryListState } from '../../state/recoil';
 
 export const AddCategory  = () => {
     const [categoryList, setCategoryList] = useRecoilState<Object[]>(CategoryListState);
