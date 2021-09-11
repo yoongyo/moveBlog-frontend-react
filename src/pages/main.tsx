@@ -9,7 +9,7 @@ export const Main = () => {
     const [posts, setPosts] = useState<[]>([]);
     
     useEffect(() => {
-        fetch(BACKEND_URL + 'posts/', {
+        fetch(BACKEND_URL + 'posts', {
             method: 'GET'
         })
         .then(res => res.json())

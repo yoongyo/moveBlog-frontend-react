@@ -12,16 +12,17 @@ import { Signup } from '../pages/signup';
 
 
 export const MainRouter = () => {
-    const account = localStorage.getItem('account');
+    const account = localStorage.getItem('token');
     return (
         <Router>
             <Switch>
                 <Route path="/create">
-                    {account ? (
+                    {/* {account ? (
                         <PostCreate/>
                     ): (
                         <Redirect to={{pathname: '/login'}}/>
-                    )}
+                    )} */}
+                    <PostCreate/>
                 </Route>
                 <Route path="/admin/:name" component={Admin}/>
                 <Route path="/admin" component={Admin}/>
