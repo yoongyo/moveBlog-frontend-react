@@ -12,7 +12,6 @@ interface IFormValues {
 export const LoginForm = (props:any) => {
 
     const { register, handleSubmit, watch, formState: {errors}} = useForm();
-
     const onSubmit: SubmitHandler<IFormValues> = () => {
         console.log(watch())
         fetch(BACKEND_URL + 'signin', {
