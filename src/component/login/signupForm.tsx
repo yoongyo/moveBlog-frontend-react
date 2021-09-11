@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useRef} from 'react';
 import { BACKEND_URL } from '../../api/backendURL';
 import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import { useHistory } from 'react-router-dom';
 
 
 interface IFormValues  {
@@ -28,6 +28,8 @@ const Input = ({ label, labelText, placeholder, register, required}: InputProps)
 
 export const SignupForm = (props:any) => {
     const { register, handleSubmit, watch, formState: {errors}} = useForm();
+    let history = useHistory();
+
     const onSubmit: SubmitHandler<IFormValues> = () => {
         console.log(watch());
         fetch(BACKEND_URL + 'signup', {
@@ -39,8 +41,10 @@ export const SignupForm = (props:any) => {
         })
         .then(res => res.json())
         .then(data => {
+            if(data.success) {
+                history.push("login")
+            }
             console.log(data)
-            // 프로필 페이지로 이동??
         })
     }
     const password = useRef({});
