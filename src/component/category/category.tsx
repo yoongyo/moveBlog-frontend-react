@@ -1,9 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react';
-import { BACKEND_URL } from '../api/backendURL';
-import plusIcon from '../img/plus_icon.svg';
+import { BACKEND_URL } from '../../api/backendURL';
+import plusIcon from '../../img/plus_icon.svg';
 import { useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { CategoryListState } from '../state/recoil';
+import { CategoryListState } from '../../state/recoil';
 
 export const Category = (props:any) => {
     const [categoryList, setCategoryList] = useRecoilState<any[]>(CategoryListState);

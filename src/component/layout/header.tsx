@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerNavigation } from './drawerNavigation'
+import { DrawerNavigation } from '../drawerNavigation'
 import { Link } from 'react-router-dom'
 
 

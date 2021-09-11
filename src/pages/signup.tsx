@@ -1,5 +1,6 @@
 import React from 'react';
-import { SignupForm } from '../component/signupForm';
+import { ReactHookForm } from '../component/login/reactHookForm';
+import { SignupForm } from '../component/login/signupForm';
 import Logo from '../img/moveLogo.png';
 
 

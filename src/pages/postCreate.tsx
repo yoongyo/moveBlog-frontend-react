@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
-import { Category } from '../component/category';
-import Header from '../component/header';
+import { Category } from '../component/category/category';
+import Header from '../component/layout/header';
 
 
 export const PostCreate = () => {

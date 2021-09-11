@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
-import Header from '../component/header';
+import Header from '../component/layout/header';
 import { RouteComponentProps } from "react-router-dom";
-import { DateFormat } from '../component/dateFormat';
-import { DateTimeFormat } from '../component/datetimeFormat';
+import { DateFormat } from '../component/dateTime/dateFormat';
+import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 
 interface ILocation {
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../component/header';
+import Header from '../component/layout/header';
 
 
 export const Profile = () => {
