@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactHookForm } from '../component/login/reactHookForm';
 import { SignupForm } from '../component/login/signupForm';
 import Logo from '../img/moveLogo.png';
 
