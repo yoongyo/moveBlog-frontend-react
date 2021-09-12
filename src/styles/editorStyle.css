@@ -1,5 +1,5 @@
 .wrapper-class {
-    
+    border-color:black
 }
 
 
@@ -10,5 +10,5 @@
 }
 
 .toolbar-class {
-    border: 1px solid rgb(209, 213, 219);
+    border: 1px solid rgb(209, 213, 219) !important; 
 }

@@ -6,12 +6,14 @@ import { useHistory } from 'react-router-dom';
 import { Category } from '../component/category/category';
 import Header from '../component/layout/header';
 import { WysiwygEditor } from '../component/wysiwygEditor';
+import { TagSelector } from '../component/tagSelector';
 
 
 export const PostCreate = () => {
     const [content, setContent] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>("");
+    const [tags, setTags] = useState([]);
     let history = useHistory();
 
 
@@ -45,6 +47,10 @@ export const PostCreate = () => {
         setCategory(id);
     }
 
+    const getTags = (tags:[]) => {
+        setTags(tags);
+    }
+
 
     return (
         <>
@@ -59,15 +65,19 @@ export const PostCreate = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
-                    <div className="col-span-1 flex flex-row">
+                    {/* <div className="col-span-1 flex flex-row">
                         <Category getCategory={getCategory}/>
-                    </div>
+                    </div> */}
                 </div>
-
                 <div className="pt-12"> 
                     <WysiwygEditor getContent={getContent}/>
                 </div>
-                <div className="buttons flex my-1 py-12">
+
+                <div className="mt-5">
+                    <TagSelector setTags={setTags} tags={tags}/>
+                </div>
+
+                <div className="buttons flex my-1 py-3">
                     <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"><Link to="/">Cancel</Link></button>
                     <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Post</button>
                 </div>
