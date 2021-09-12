@@ -22,7 +22,7 @@ export const Main = () => {
     return (
         <>
             <Header/>
-            <div className="max-w-4xl mx-auto my-8">
+            <div className="max-w-4xl mx-auto my-8" style={{background: "#D2D8FB", height:"100px"}}>
             </div>
             <div className="max-w-4xl mx-auto">
                 {posts.map((post, index) => (
