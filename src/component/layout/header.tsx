@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom'
 import BlackLogo from '../../img/blackLogo.png';
 
 const Header = () => {
+    const token = localStorage.getItem("token")
+
     return (
         <div className="border-b p-5 border-gray-200">
-            <div className="absolute">
-                <DrawerNavigation/>
-            </div>
+            {token &&
+                <div className="absolute">
+                    <DrawerNavigation/>
+                </div>
+            }
             <div className="text-center sm:max-w-4xl sm:mx-auto sm:text-left">
                 <Link className="flex flex-row" to="/">
                     <img src={BlackLogo} width={30}/>

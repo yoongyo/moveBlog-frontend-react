@@ -24,18 +24,22 @@ export const PostCreate = () => {
     // }, [])
     
     const onClick = () => {
-        fetch(BACKEND_URL + 'posts', {
+        console.log(tags);
+        const tagIdList:any = []
+        tags.map((tag:any) => tagIdList.push(tag.value))
+        console.log(tagIdList);
+        fetch(BACKEND_URL + '/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': String(localStorage.getItem("token"))
             },
-            body: JSON.stringify({title: title, content: content, categoryId: Number(category)})
+            body: JSON.stringify({title: title, content: content, tags: tagIdList})
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.id)
-            history.push('posts/'+ data.id)
+            console.log(data.data)
+            history.push('posts/'+ data.data)
         })
     }
 

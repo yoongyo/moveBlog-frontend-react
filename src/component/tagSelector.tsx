@@ -11,7 +11,7 @@ export const TagSelector = (props: any) => {
     
 
     useEffect(() => {
-        fetch(BACKEND_URL + 'tags', {
+        fetch(BACKEND_URL + '/tags', {
             method: 'GET',
         })
         .then(res => res.json())
@@ -29,7 +29,7 @@ export const TagSelector = (props: any) => {
     }
 
     const createTag = () => {
-        fetch(BACKEND_URL + 'tags', {
+        fetch(BACKEND_URL + '/tags', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

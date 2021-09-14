@@ -9,19 +9,27 @@ interface ILocation {
 }
 
 
+interface IPost {
+    title: string,
+    content: string,
+    createdDate: string,
+    author: string,
+
+}
+
 export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> =  ({location}) => {
     const pathName = location.pathname;
-    const [post, setPost] = useState({"title":"", "content": "", "createdDate": ""});
+    const [post, setPost] = useState<IPost>({title: "", content: "", createdDate: "", author: ""});
 
     useEffect(() => {
         console.log(pathName);
-        fetch(BACKEND_URL + pathName + '/', {
+        fetch(BACKEND_URL + pathName, {
             method: 'GET'
         })
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            setPost(data);
+            setPost(data.data);
         })
     }, []) 
     
