@@ -17,7 +17,7 @@ export const PostListComponent = ({post}:any) => {
             }}>
                 <div className="mb-5">
                     <DateFormat datetime={post.createdDate}/> 
-                    <h1>정윤교</h1>
+                    <h1>{post.user}</h1>
                 </div>
                 <div>
                     <h1 className="font-extrabold text-2xl mb-2">{post.title}</h1>

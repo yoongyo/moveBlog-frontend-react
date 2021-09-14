@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../../api/backendURL';
 import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import { useHistory } from 'react-router-dom';
 
 
 interface IFormValues {
@@ -10,11 +11,12 @@ interface IFormValues {
 }
 
 export const LoginForm = (props:any) => {
-
+    let history = useHistory();
+    const [loginError, setLoginError] = useState<String>("");
     const { register, handleSubmit, watch, formState: {errors}} = useForm();
     const onSubmit: SubmitHandler<IFormValues> = () => {
         console.log(watch())
-        fetch(BACKEND_URL + 'signin', {
+        fetch(BACKEND_URL + '/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,9 +26,11 @@ export const LoginForm = (props:any) => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                // 로그인 전에 누렀던 페이지로 리다이렉트 
+                history.push("/");
+                localStorage.setItem("token", data.data);
+            } else{
+                setLoginError(data.msg)
             }
-            console.log(data.data);
         })
     }
 
@@ -35,14 +39,14 @@ export const LoginForm = (props:any) => {
         <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input 
-                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3" 
+                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
                     placeholder="아이디"   
                     {...register("loginId", {
                         required: true,
                     })}
                 />
                 <input 
-                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3" 
+                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
                     placeholder="비밀번호"   
                     {...register("password", {
                         required: true,
@@ -64,6 +68,9 @@ export const LoginForm = (props:any) => {
                         <p>회원가입</p>
                     </button>
                 </Link>
+                <div className="text-center py-1">
+                    <p className="text-red-600">{loginError}</p>
+                </div>
             </form>
         </div>
     )
