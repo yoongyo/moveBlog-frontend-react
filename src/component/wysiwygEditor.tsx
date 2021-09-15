@@ -11,7 +11,7 @@ export const WysiwygEditor = (props:any) => {
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 
     const onChange = (content:string) => {
-        props.getContent(content);
+        props.setContent(content);
     } 
     return (
         <Editor

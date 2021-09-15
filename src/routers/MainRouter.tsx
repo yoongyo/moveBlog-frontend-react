@@ -24,6 +24,7 @@ export const MainRouter = () => {
                     )} */}
                     <PostCreate/>
                 </Route>
+                {/* <Route path="/tag/:name" component={Tag}/> */}
                 <Route path="/admin/:name" component={Admin}/>
                 <Route path="/admin" component={Admin}/>
                 <Route path="/login" component={Login}/>
