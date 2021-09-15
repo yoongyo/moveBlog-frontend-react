@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { DateFormat } from '../component/dateTime/dateFormat';
 import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 import { Footer } from '../component/layout/footer';
+import { TagComponent } from '../component/tagComponent';
 
 interface ILocation {
 }
@@ -35,15 +36,12 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
             setPost(data.data);
         })
     }, []) 
-    
-    const onClick = () => {
 
-    }
 
     return (
         <div className="flex flex-col min-h-screen">
             <Header/>
-            <div className="max-w-4xl mx-auto py-12 flex-1 w-full">
+            <div className="max-w-4xl mx-auto py-12 flex-1 w-full px-3">
                 <div className="border-b">
                     <h1 className="font-bold text-3xl py-5">{post.title}</h1>
                 </div>
@@ -56,11 +54,7 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                 </div>
                 <div className="flex flex-row flex-wrap">
                     {post.postTags.map(tag => (
-                        <div className="mb-2 mr-3">
-                            <button className="bg-gray-200 px-2 hover:bg-gray-300" onClick={onClick} value={tag["id"]}>
-                                <p>#{tag["tagName"]}</p>
-                            </button>
-                        </div>
+                        <TagComponent tag={tag}/>
                     ))}
                 </div>
             </div>

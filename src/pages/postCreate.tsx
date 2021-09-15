@@ -17,8 +17,7 @@ export const PostCreate = () => {
     const [category, setCategory] = useState<string>("");
     const [tags, setTags] = useState([]);
     let history = useHistory();
-
-
+    
     // useEffect(() => {
     //     if (!localStorage.getItem('token')) {
     //         history.push('login')

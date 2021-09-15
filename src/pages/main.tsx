@@ -7,18 +7,25 @@ import { Footer } from '../component/layout/footer';
 import { TagList } from '../component/tagList';
 import Pagination from 'react-js-pagination';
 import '../styles/paging.css';
+import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
+
 
 
 interface IPost {
     
 }
 
-export const Main = () => {
+export const Main = ({location}:any) => {
     const [posts, setPosts] = useState<Array<any>[]>([]);
     const [tag, setTag] = useState();
     const [allPosts, setAllPosts] = useState<[]>([]);
     const [page, setPage] = useState(1)
     const pagination = 6;
+
+    const tagQuery = queryString.parse(location.search);
+    
+
     
     useEffect(() => {
         fetch(BACKEND_URL + '/posts', {
@@ -26,13 +33,22 @@ export const Main = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.reverse());
-            setAllPosts(data);
-            setPosts(data.slice(0,pagination))
+            data.reverse();
+            if (tagQuery.tag) {
+                console.log(tagQuery.tag)
+                // 이건 진짜 유용하니까 
+                console.log(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
+                setAllPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
+                setPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
+            } else {
+                setAllPosts(data);
+                setPosts(data.slice(0,pagination))
+            }
         })
     }, [])
 
     const onChange = (page:any) => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
         setPage(page);
         setPosts(allPosts.slice((page-1) * pagination, (page*pagination)));
     }
@@ -40,30 +56,31 @@ export const Main = () => {
     
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen ">
             <Header/>
-            <p>{tag}</p>
-            <div className="max-w-4xl mx-auto py-12 flex-1 w-full grid grid-cols-4">
+            <div className="max-w-4xl mx-auto py-12 flex-1 w-full grid sm:grid-cols-4">
                 <div className="col-span-3">
                     {posts.map((post, index) => (
                         <PostListComponent post={post}/>
                     ))}
                 </div>
-                <div className="col-span-1">
-                    <TagList setTag={setTag}/>
+                <div className="col-span-1 relative">
+                    <TagList setTag={setTag} tag={tagQuery.tag}/>
                 </div>
             </div>
-            <div className="mb-16">
-                <Pagination 
-                    activePage={page} 
-                    itemsCountPerPage={pagination} 
-                    totalItemsCount={allPosts.length} 
-                    pageRangeDisplayed={6} 
-                    prevPageText={"‹"} 
-                    nextPageText={"›"} 
-                    onChange={onChange} 
-                />
-            </div>
+            {allPosts.length > pagination &&
+                <div className="mb-16">
+                    <Pagination 
+                        activePage={page} 
+                        itemsCountPerPage={pagination} 
+                        totalItemsCount={allPosts.length} 
+                        pageRangeDisplayed={5} 
+                        prevPageText={"‹"} 
+                        nextPageText={"›"} 
+                        onChange={onChange} 
+                    />
+                </div>
+            }
             <Footer/>   
         </div>
     )

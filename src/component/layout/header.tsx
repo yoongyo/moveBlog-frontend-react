@@ -13,11 +13,12 @@ const Header = () => {
                     <DrawerNavigation/>
                 </div>
             }
-            <div className="text-center sm:max-w-4xl sm:mx-auto sm:text-left">
-                <Link className="flex flex-row" to="/">
+            <div className="sm:max-w-4xl sm:mx-auto sm:text-left">
+                <a href="/" className="flex flex-row justify-center sm:justify-start">
                     <img src={BlackLogo} width={30}/>
                     <p className="text-xl sm:text-2xl font-bold box-content mx-2">MOVE</p> 
-                    <p className="text-lg sm:text-lg font-bold self-center" style={{color: '#c0c0c0', 'fontWeight': 500}}>기술블로그</p></Link>
+                    <p className="text-lg sm:text-lg font-bold self-center" style={{color: '#c0c0c0', 'fontWeight': 500}}>기술블로그</p>
+                </a>
             </div>
         </div>
     )
