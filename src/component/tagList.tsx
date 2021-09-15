@@ -11,7 +11,6 @@ export const TagList = (props:any) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             setTags(data);
         })
     }, [])
@@ -22,12 +21,21 @@ export const TagList = (props:any) => {
     }
 
     return (
-        <div className="py-6 px-4">
+        <div className="py-6 px-4 sticky top-0">
             <p className="text-blue-900 font-extrabold">Tags</p>
             <div className="py-4">
-                {tags.map((item) => (
+                {tags.map((tag:any) => (
                     <div className="mb-2">
-                        <button className="bg-gray-200 px-2 hover:bg-gray-300" onClick={onClick} value={item["id"]}>#{item["name"]}</button>
+                        {tag.name == props.tag ? (
+                            <button className="bg-gray-300 px-2 hover:bg-gray-300" onClick={onClick} value={tag["id"]}>
+                                <a href={"/?tag="+tag.name}>#{tag.name}</a>
+                            </button>
+                        ):(
+                           <button className="bg-gray-200 px-2 hover:bg-gray-300" onClick={onClick} value={tag["id"]}>
+                                <a href={"/?tag="+tag.name}>#{tag.name}</a>                               
+                            </button>
+                            )
+                        }
                     </div>
                 ))}
             </div>
