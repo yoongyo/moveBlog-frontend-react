@@ -3,8 +3,7 @@ import React from 'react';
 
 export const Footer = () => {
     return (
-        <div className="h-60 py-20 bg-primary">
-            
+        <div className="h-60 py-20 bg-primary w-full">
             <div className="max-w-3xl mx-auto  text-white mb-10">
                 <div className="grid grid-rows-1 grid-flow-col gap-4">
                     <div>
@@ -39,7 +38,7 @@ export const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="mx-auto text-white text-center text-sm">
+            <div className="mx-auto text-white text-center text-sm bg-primary">
                 <h1>© 2000-2021 Move Inc.</h1>
                 <h1>orbisoptimus</h1>
             </div>
