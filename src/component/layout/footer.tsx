@@ -20,9 +20,9 @@ export const Footer = () => {
                     </div>
                     
                     <div>
-                        <a href="https://class.orbi.kr/" className=" hover:underline">
+                        <a href="https://orbi.kr/" className=" hover:underline">
                             <h1>Orbi</h1>
-                            <h1 style={{color: "#999"}}>on-line classes</h1>
+                            <h1 style={{color: "#999"}}>on-line community</h1>
                         </a>
                     </div>
                     <div>

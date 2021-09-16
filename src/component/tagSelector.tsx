@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { BACKEND_URL } from '../api/backendURL';
 import plusIcon from '../img/plus_icon.svg';
 import { Fade } from '@material-ui/core';
+import { getCookie } from './cookie/cookie';
 
 export const TagSelector = (props: any) => { 
     const [fade, setFade] = useState(false);
@@ -33,7 +34,7 @@ export const TagSelector = (props: any) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': String(localStorage.getItem("token"))
+                'X-AUTH-TOKEN': getCookie('jwt')
             },
             body: JSON.stringify({name: tagInput})
         })
@@ -66,6 +67,8 @@ export const TagSelector = (props: any) => {
             />
             <a className="px-4 my-auto" onClick={onClick}><img src={plusIcon}/></a>
         </div>
+        {props.errorTags && <p className="text-red-600 text-sm">{props.errorTags}</p>}
+
         <Fade in={fade} disableStrictModeCompat={true}>
             <div>
                 <input className="border rounded-md mt-3 py-1 px-2" onChange={(e) => setTagInput(e.target.value)} value={tagInput}/>

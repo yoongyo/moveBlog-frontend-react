@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../../api/backendURL';
 import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
+import { setCookie } from '../cookie/cookie';
 
 
 interface IFormValues {
@@ -14,6 +15,8 @@ export const LoginForm = (props:any) => {
     let history = useHistory();
     const [loginError, setLoginError] = useState<String>("");
     const { register, handleSubmit, watch, formState: {errors}} = useForm();
+
+
     const onSubmit: SubmitHandler<IFormValues> = () => {
         console.log(watch())
         fetch(BACKEND_URL + '/signin', {
@@ -27,7 +30,7 @@ export const LoginForm = (props:any) => {
         .then(data => {
             if (data.success) {
                 history.push("/");
-                localStorage.setItem("token", data.data);
+                setCookie('jwt', data.data)
             } else{
                 setLoginError(data.msg)
             }
