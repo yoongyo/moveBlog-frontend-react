@@ -50,7 +50,8 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                         <DateTimeFormat datetime={post.createdDate}/>
                         <p className="ml-3">{post.author.name}</p>
                     </div>
-                    <div className="w-full" dangerouslySetInnerHTML={{ __html: post.content }} style={{wordBreak: 'break-word'}}/>
+                    <div className="w-full" dangerouslySetInnerHTML={{ __html: post.content }}/>
+                    <div>{post.content}</div>
                 </div>
                 <div className="flex flex-row flex-wrap">
                     {post.postTags.map(tag => (
