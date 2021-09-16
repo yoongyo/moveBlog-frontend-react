@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { BACKEND_URL } from '../api/backendURL';
 import plusIcon from '../img/plus_icon.svg';
 import { Fade } from '@material-ui/core';
+import { getCookie } from './cookie/cookie';
 
 export const TagSelector = (props: any) => { 
     const [fade, setFade] = useState(false);
@@ -33,7 +34,7 @@ export const TagSelector = (props: any) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': String(localStorage.getItem("token"))
+                'X-AUTH-TOKEN': getCookie('jwt')
             },
             body: JSON.stringify({name: tagInput})
         })

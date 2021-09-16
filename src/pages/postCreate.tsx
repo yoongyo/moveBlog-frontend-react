@@ -7,6 +7,7 @@ import Header from '../component/layout/header';
 import { WysiwygEditor } from '../component/wysiwygEditor';
 import { TagSelector } from '../component/tagSelector';
 import { Footer } from '../component/layout/footer';
+import { getCookie } from '../component/cookie/cookie';
 
 
 export const PostCreate = () => {
@@ -20,11 +21,10 @@ export const PostCreate = () => {
     const [errorContent, setErrorContent] = useState<string>('');
     const [errorTags, setErrorTags] = useState<string>('');
 
-
     let history = useHistory();
     
     useEffect(() => {
-        if (!localStorage.getItem('token')) {
+        if (!getCookie('jwt')) {
             history.push('login')
         }
     }, [])
@@ -33,12 +33,11 @@ export const PostCreate = () => {
         nullCheck()
         const tagIdList:any = []
         tags.map((tag:any) => tagIdList.push(tag.value))
-        console.log(tagIdList);
         fetch(BACKEND_URL + '/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': String(localStorage.getItem("token"))
+                'X-AUTH-TOKEN': getCookie('jwt')
             },
             body: JSON.stringify({title: title, subTitle: subTitle, content: content, tags: tagIdList})
         })

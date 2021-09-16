@@ -9,6 +9,7 @@ import Pagination from 'react-js-pagination';
 import '../styles/paging.css';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
+import { getCookie } from '../component/cookie/cookie';
 
 
 
@@ -58,7 +59,7 @@ export const Main = ({location}:any) => {
     return (
         <div className="flex flex-col min-h-screen ">
             <Header/>
-            <div className="max-w-4xl mx-auto py-12 flex-1 w-full grid sm:grid-cols-4">
+            <div className="max-w-4xl mx-auto py-12 flex-1 w-full sm:grid sm:grid-cols-4">
                 <div className="col-span-3">
                     {posts.map((post, index) => (
                         <PostListComponent post={post}/>

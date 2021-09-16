@@ -2,10 +2,12 @@ import React from 'react';
 import { DrawerNavigation } from '../drawerNavigation'
 import { Link } from 'react-router-dom'
 import BlackLogo from '../../img/blackLogo.png';
+import Cookies from 'universal-cookie';
+import { getCookie } from '../cookie/cookie';
 
 const Header = () => {
-    const token = localStorage.getItem("token")
-
+    const token = getCookie('jwt');
+    
     return (
         <div className="border-b p-5 border-gray-200">
             {token &&

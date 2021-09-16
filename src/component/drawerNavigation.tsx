@@ -4,6 +4,7 @@ import 'react-modern-drawer/dist/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { getCookie } from './cookie/cookie';
 
 const DrawerStyle:React.CSSProperties = {
     'backgroundColor': '#2A3F54'
@@ -12,7 +13,7 @@ const DrawerStyle:React.CSSProperties = {
 
 export const DrawerNavigation = () => {
 
-    const login = localStorage.getItem('account')
+    const jwt = getCookie('jwt');
 
     const [isOpen, setIsOpen] = useState(false);
     const toggleDrawer = () => {
@@ -27,7 +28,7 @@ export const DrawerNavigation = () => {
                 </div>
                 <nav className="text-white">
                     <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/create">Create Post</Link>
-                    {login ? (
+                    {jwt ? (
                         <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/profile">Profile</Link>
                     ): (
                         <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/login">Login</Link>
