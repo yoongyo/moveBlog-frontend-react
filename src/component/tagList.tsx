@@ -26,7 +26,7 @@ export const TagList = (props:any) => {
             <div className="py-4">
                 {tags.map((tag:any) => (
                     <div className="mb-2">
-                        {tag.name == props.tag ? (
+                        {tag.name === props.tag ? (
                             <button className="bg-gray-300 px-2 hover:bg-gray-300" onClick={onClick} value={tag["id"]}>
                                 <a href={"/?tag="+tag.name}>#{tag.name}</a>
                             </button>

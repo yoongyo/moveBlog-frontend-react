@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
-import { Category } from '../component/category/category';
 import Header from '../component/layout/header';
 import { WysiwygEditor } from '../component/wysiwygEditor';
 import { TagSelector } from '../component/tagSelector';
@@ -11,21 +10,27 @@ import { Footer } from '../component/layout/footer';
 
 
 export const PostCreate = () => {
-    const [content, setContent] = useState<string>('');
-    const [title, setTitle] = useState<string>('');
-    const [subTitle, setSubTitle] = useState<string>('');
-    const [category, setCategory] = useState<string>("");
-    const [tags, setTags] = useState([]);
+    const [title, setTitle] = useState<string | null>(null);
+    const [subTitle, setSubTitle] = useState<string | null>(null);
+    const [content, setContent] = useState<string | null>(null);
+    const [tags, setTags] = useState<[]>([]);
+
+    const [errorTitle, setErrorTitle] = useState<string>('');
+    const [errorSubTitle, setErrorSubTitle] = useState<string>('');
+    const [errorContent, setErrorContent] = useState<string>('');
+    const [errorTags, setErrorTags] = useState<string>('');
+
+
     let history = useHistory();
     
-    // useEffect(() => {
-    //     if (!localStorage.getItem('token')) {
-    //         history.push('login')
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            history.push('login')
+        }
+    }, [])
     
     const onClick = () => {
-        console.log(tags);
+        nullCheck()
         const tagIdList:any = []
         tags.map((tag:any) => tagIdList.push(tag.value))
         console.log(tagIdList);
@@ -39,22 +44,48 @@ export const PostCreate = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.data)
-            history.push('posts/'+ data.data)
+            if (data.success) {
+                console.log(data.data)
+                history.push('posts/'+ data.data)
+            } else {
+                console.log("잘못된 접근입니다.")
+            }
         })
+    }
+
+    const onKeyDown = (keyEvent:any) => {
+        if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+            keyEvent.preventDefault();
+        }
+    }
+
+    const nullCheck = () => {
+        if (title === null) {
+            setErrorTitle("제목을 입력해주세요")
+        }
+        if (subTitle === null) {
+            setErrorSubTitle("부 제목을 입력해주세요")
+        }
+        if (content === null) {
+            setErrorContent("본문을 입력해주세요")
+        }
+        if (tags.length === 0) {
+            setErrorTags("하나 이상의 태그를 입력해주세요")
+        }
     }
 
     return (
         <div className="flex flex-col min-h-screen">
             <Header/>
             <div className="max-w-4xl mx-auto py-12 flex-1 w-full px-6">
-                <form>
+                <form onKeyDown={onKeyDown}>
                     <div className="pt-12">
                         <input 
                             className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
                             placeholder="제목" 
                             onChange={(e) => setTitle(e.target.value)}
                         />
+                        {errorTitle && <p className="text-red-600 text-sm">{errorTitle}</p>}
                     </div>
                     <div className="pt-12">
                         <input 
@@ -62,13 +93,15 @@ export const PostCreate = () => {
                             placeholder="부 제목" 
                             onChange={(e) => setSubTitle(e.target.value)}
                         />
+                        {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
                     </div>
                     <div className="pt-16"> 
                         <WysiwygEditor setContent={setContent}/>
+                        {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
                     </div>
 
                     <div className="mt-5">
-                        <TagSelector setTags={setTags} tags={tags}/>
+                        <TagSelector setTags={setTags} tags={tags} errorTags={errorTags}/>
                     </div>
 
                     <div className="buttons flex my-1 py-3">

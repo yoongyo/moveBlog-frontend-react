@@ -66,6 +66,8 @@ export const TagSelector = (props: any) => {
             />
             <a className="px-4 my-auto" onClick={onClick}><img src={plusIcon}/></a>
         </div>
+        {props.errorTags && <p className="text-red-600 text-sm">{props.errorTags}</p>}
+
         <Fade in={fade} disableStrictModeCompat={true}>
             <div>
                 <input className="border rounded-md mt-3 py-1 px-2" onChange={(e) => setTagInput(e.target.value)} value={tagInput}/>
