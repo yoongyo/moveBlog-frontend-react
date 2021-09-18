@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Header from '../component/layout/header';
-import { PostListComponent } from '../component/postListComponent';
+import { PostListComponent } from '../component/post/postListComponent';
 import Logo from '../img/logo.png';
 import { BACKEND_URL } from '../api/backendURL';
 import { Footer } from '../component/layout/footer';
-import { TagList } from '../component/tagList';
+import { TagList } from '../component/tag/tagList';
 import Pagination from 'react-js-pagination';
 import '../styles/paging.css';
 import { useHistory } from 'react-router-dom';
@@ -62,7 +62,7 @@ export const Main = ({location}:any) => {
             <div className="max-w-4xl mx-auto py-12 flex-1 w-full sm:grid sm:grid-cols-4">
                 <div className="col-span-3">
                     {posts.map((post, index) => (
-                        <PostListComponent post={post}/>
+                        <PostListComponent post={post} key={index}/>
                     ))}
                 </div>
                 <div className="col-span-1 relative">

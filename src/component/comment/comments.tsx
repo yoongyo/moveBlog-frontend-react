@@ -9,7 +9,7 @@ export const Comments = ({postId}: any) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        fetch(BACKEND_URL + '/comments', {
+        fetch(BACKEND_URL + '/comments/'+postId, {
             method: 'GET',
         })
         .then(res => res.json())

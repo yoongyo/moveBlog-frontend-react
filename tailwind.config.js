@@ -12,7 +12,13 @@ module.exports = {
        DEFAULT: theme('colors.gray.300', 'currentColor'),
       'primary': '#202020',
       'secondary': '#334257',
-     }),
+    }),
+    textColor: theme => ({
+      'primary': '#2A3F54',
+      'fakeWhite': '#FFFFFE',
+      'danger': '#e3342f',
+    })
+    
   },
   variants: {
     extend: {},
