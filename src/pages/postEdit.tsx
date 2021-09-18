@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +10,10 @@ import { Footer } from '../component/layout/footer';
 import { getCookie } from '../component/cookie/cookie';
 
 
-export const PostCreate = () => {
+export const PostEdit = () => {
+    const param:any = useParams();
+    const postId = param.post_id
+
     const [title, setTitle] = useState<string | null>(null);
     const [subTitle, setSubTitle] = useState<string | null>(null);
     const [content, setContent] = useState<string | null>(null);
@@ -21,12 +24,22 @@ export const PostCreate = () => {
     const [errorContent, setErrorContent] = useState<string>('');
     const [errorTags, setErrorTags] = useState<string>('');
 
+    const [post, setPost] = useState();
+
     let history = useHistory();
     
     useEffect(() => {
         if (!getCookie('jwt')) {
             history.push('login')
         }
+        fetch(BACKEND_URL + '/posts/' + postId, {
+            method: 'GET',            
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setPost(json.data);
+        })
     }, [])
     
     const onClick = () => {
@@ -104,7 +117,7 @@ export const PostCreate = () => {
 
                     <div className="buttons flex my-1 py-3">
                         <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"><Link to="/">Cancel</Link></button>
-                        <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Post</button>
+                        <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Edit</button>
                     </div>
                 </form>
             </div>

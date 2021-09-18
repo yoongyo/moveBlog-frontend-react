@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import Header from '../component/layout/header';
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { DateFormat } from '../component/dateTime/dateFormat';
 import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 import { Footer } from '../component/layout/footer';
 import { TagComponent } from '../component/tagComponent';
-import { CommentForm } from '../component/comment/commentForm';
 import { Comments } from '../component/comment/comments';
 import { getCookie } from '../component/cookie/cookie';
+import Cookies from 'universal-cookie';
+import { useHistory } from 'react-router-dom';
+
 
 interface ILocation {
 }
@@ -30,21 +32,40 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
     const pathName = location.pathname;
     const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:""}, postTags: [], authority: false});
 
+    let history = useHistory();
+
     useEffect(() => {
-        console.log(pathName);
-        fetch(BACKEND_URL + pathName, {
-            method: 'GET',
-            headers: {
-                'X-AUTH-TOKEN': getCookie('jwt')
-            },
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            setPost(json.data);
-        })
+        if (getCookie('jwt')) {
+            fetch(BACKEND_URL + '/posts' + pathName+'/login', {
+                method: 'GET',            
+                headers: {
+                    'X-AUTH-TOKEN': getCookie('jwt')                    
+                },
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                setPost(json.data);
+            })
+        } else {
+            fetch(BACKEND_URL + '/posts' + pathName, {
+                method: 'GET',            
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                setPost(json.data);
+            })
+        }
     }, []) 
 
+    const onClickDelete = () => {
+
+    }
+
+    const onClickEdit = () => {
+        history.push('/edit/'+post.id)
+    }
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -65,13 +86,15 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                         <TagComponent tag={tag}/>
                     ))}
                 </div>
+                {post.authority && (
+                    <div className="flex flex-row-reverse mt-8">
+                        <button className="py-2 px-3 bg-primary text-white rounded-md ml-2">
+                            삭제
+                        </button>
+                        <Link to={'/edit/'+post.id} className="py-2 px-3 bg-primary text-white rounded-md">수정</Link>
+                    </div>
+                )}
             </div>
-            
-            {post.authority && (
-                <div>
-                </div>
-            )}
-            
             <Comments postId={post.id}/>
             <Footer/>
         </div>

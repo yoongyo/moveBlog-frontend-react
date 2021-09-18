@@ -7,12 +7,12 @@ import { Login } from '../pages/login';
 import { Main } from '../pages/main';
 import { PostCreate } from '../pages/postCreate';
 import { PostDetail } from '../pages/postDetail';
+import { PostEdit } from '../pages/postEdit';
 import { Profile } from '../pages/profile';
 import { Signup } from '../pages/signup';
 
 
 export const MainRouter = () => {
-    const account = localStorage.getItem('token');
     return (
         <Router>
             <Switch>
@@ -32,7 +32,8 @@ export const MainRouter = () => {
                 <Route path="/profile" component={Profile}/>
                 <Route path="/" exact component={Main}/>
                 <Route path="/addCategory" component={AddCategory}/>
-                <Route path="/posts/:post_id" component={PostDetail}/>
+                <Route path="/edit/:post_id" component={PostEdit}/>
+                <Route path="/:post_id" component={PostDetail}/>
             </Switch>
         </Router>
     )
