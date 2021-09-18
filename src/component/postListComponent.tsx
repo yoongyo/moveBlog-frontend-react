@@ -9,7 +9,7 @@ export const PostListComponent = ({post}:any) => {
 
     return (
         <div className="border-b mb-10 mx-4 sm:px-0">
-            <Link to={{pathname:'posts/'+`${post.id}`}}>
+            <Link to={{pathname:'/'+`${post.id}`}}>
                 <div className="mb-5 flex felx-row">
                     <DateFormat datetime={post.createdDate}/> 
                     <h1 className="ml-3">{post.author.name}</h1>
