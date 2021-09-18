@@ -43,7 +43,7 @@ export const Main = ({location}:any) => {
                 setPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
             } else {
                 setAllPosts(data);
-                setPosts(data.slice(0,pagination))
+                setPosts(data.slice(0, pagination))
             }
         })
     }, [])
