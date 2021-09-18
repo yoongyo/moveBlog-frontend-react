@@ -6,12 +6,16 @@ import { DateFormat } from '../component/dateTime/dateFormat';
 import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 import { Footer } from '../component/layout/footer';
 import { TagComponent } from '../component/tagComponent';
+import { CommentForm } from '../component/comment/commentForm';
+import { Comments } from '../component/comment/comments';
+import { getCookie } from '../component/cookie/cookie';
 
 interface ILocation {
 }
 
 
 interface IPost {
+    id: number,
     title: string,
     content: string,
     createdDate: string,
@@ -19,21 +23,25 @@ interface IPost {
         name: ""
     },
     postTags: []
+    authority :boolean;
 }
 
 export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> =  ({location}) => {
     const pathName = location.pathname;
-    const [post, setPost] = useState<IPost>({title: "", content: "", createdDate: "", author: {name:""}, postTags: []});
+    const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:""}, postTags: [], authority: false});
 
     useEffect(() => {
         console.log(pathName);
         fetch(BACKEND_URL + pathName, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'X-AUTH-TOKEN': getCookie('jwt')
+            },
         })
         .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setPost(data.data);
+        .then(json => {
+            console.log(json);
+            setPost(json.data);
         })
     }, []) 
 
@@ -58,6 +66,13 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                     ))}
                 </div>
             </div>
+            
+            {post.authority && (
+                <div>
+                </div>
+            )}
+            
+            <Comments postId={post.id}/>
             <Footer/>
         </div>
     )
