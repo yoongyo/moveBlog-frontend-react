@@ -39,7 +39,7 @@ export const LoginForm = (props:any) => {
 
 
     return (
-        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white">
+        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white ">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input 
                     className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
@@ -57,7 +57,7 @@ export const LoginForm = (props:any) => {
                     type="password"
                 />
                 <button 
-                    className="rounded-full w-full h-11 px mx-auto text-white mb-3" 
+                    className="rounded-full w-full h-11 px mx-auto mb-3 text-fakeWhite" 
                     style={{background: "linear-gradient(to left, #688fed 0%, #475ca9 100%)"}} 
                     type="submit"
                 >
@@ -65,7 +65,7 @@ export const LoginForm = (props:any) => {
                 </button>
                 <Link to="/signup" >
                     <button 
-                        className="rounded-full w-full h-11 px mx-auto text-white" 
+                        className="rounded-full w-full h-11 px mx-auto text-fakeWhite" 
                         style={{background: "linear-gradient(to left, #688fed 0%, #475ca9 100%)"}} 
                     >
                         <p>회원가입</p>

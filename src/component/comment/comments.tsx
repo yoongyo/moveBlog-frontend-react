@@ -1,20 +1,25 @@
 import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router';
 import { BACKEND_URL } from '../../api/backendURL';
 import { CommentComponent } from './commentComponent';
 import { CommentForm } from './commentForm';
 
 
 
-export const Comments = ({postId}: any) => {
+export const Comments = () => {
+    const param:any = useParams();
+    const postId = param.post_id;
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
+        console.log("fuck")
         fetch(BACKEND_URL + '/comments/'+postId, {
             method: 'GET',
         })
         .then(res => res.json())
         .then(json => {
-            // setComments(json.data);
+            console.log(json);
+            setComments(json);
         })
     }, [])
 
@@ -24,7 +29,7 @@ export const Comments = ({postId}: any) => {
             {comments.map((comment) => (
                 <CommentComponent comment={comment}/>
             ))}
-            <CommentForm postId={postId}/>
+            <CommentForm postId={postId} comments={comments} setComments={setComments}/>
         </div>
     )
 }

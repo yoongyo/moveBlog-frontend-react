@@ -85,7 +85,7 @@ export const SignupForm = (props:any) => {
                     {errors.cPassword && <p className="text-sm text-red-600">{errors.cPassword.message}</p>}
                 </div>
                 <Input label="name" labelText="이름" register={register} required placeholder="이름"/>
-                <button className="rounded-full w-full h-11 mt-6 mx-auto text-white" style={{background: "linear-gradient(to left, #688fed 0%, #475ca9 100%)"}}>
+                <button className="rounded-full w-full h-11 mt-6 mx-auto text-fakeWhite" style={{background: "linear-gradient(to left, #688fed 0%, #475ca9 100%)"}}>
                     회원가입
                 </button>
             </form>

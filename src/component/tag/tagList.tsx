@@ -11,6 +11,7 @@ export const TagList = (props:any) => {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             setTags(data);
         })
     }, [])

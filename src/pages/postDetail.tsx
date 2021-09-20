@@ -45,7 +45,6 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 setPost(json.data);
             })
         } else {
@@ -54,7 +53,6 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 setPost(json.data);
             })
         }
@@ -100,14 +98,14 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                     </div>
                     {post.authority && (
                         <div className="flex flex-row-reverse mt-8">
-                            <button className="py-2 px-3 bg-primary text-white rounded-md ml-2" onClick={onClickDelete}>
+                            <button className="py-2 px-3 rounded-md ml-2 bg-primary text-fakeWhite " onClick={onClickDelete}>
                                 삭제
                             </button>
-                            <Link to={'/edit/'+post.id} className="py-2 px-3 bg-primary text-white rounded-md">수정</Link>
+                            <Link to={'/edit/'+post.id} className="py-2 px-3 rounded-md bg-primary text-fakeWhite">수정</Link>
                         </div>
                     )}
                 </div>
-            <Comments postId={post.id}/>
+            <Comments/>
             <Footer/>
         </div>
     )

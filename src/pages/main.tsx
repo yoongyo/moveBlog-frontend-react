@@ -7,7 +7,6 @@ import { Footer } from '../component/layout/footer';
 import { TagList } from '../component/tag/tagList';
 import Pagination from 'react-js-pagination';
 import '../styles/paging.css';
-import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { getCookie } from '../component/cookie/cookie';
 
