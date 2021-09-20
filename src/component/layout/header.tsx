@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import BlackLogo from '../../img/blackLogo.png';
 import WhiteLogo from '../../img/logo.png';
 import Cookies from 'universal-cookie';
-import { getCookie } from '../cookie/cookie';
+import { getCookie } from '../../cookie/cookie';
 import { DarkModeBtn } from '../button/darkModeBtn';
 import { useRecoilState } from 'recoil';
 import { IsDarkModeState } from '../../state/recoil';

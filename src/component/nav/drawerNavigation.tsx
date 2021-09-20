@@ -4,7 +4,7 @@ import 'react-modern-drawer/dist/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { getCookie } from '../cookie/cookie';
+import { getCookie } from '../../cookie/cookie';
 
 const DrawerStyle:React.CSSProperties = {
     'backgroundColor': '#2A3F54'

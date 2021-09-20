@@ -8,7 +8,7 @@ import { TagList } from '../component/tag/tagList';
 import Pagination from 'react-js-pagination';
 import '../styles/paging.css';
 import queryString from 'query-string';
-import { getCookie } from '../component/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 
 
 

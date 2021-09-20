@@ -7,7 +7,7 @@ import Header from '../component/layout/header';
 import { WysiwygEditor } from '../component/wysiwygEditor/wysiwygEditor';
 import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
-import { getCookie } from '../component/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 import { useRecoilState } from 'recoil';
 import { IsDarkModeState } from '../state/recoil';
 

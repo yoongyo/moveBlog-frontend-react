@@ -4,12 +4,12 @@ import { MainRouter } from './routers/MainRouter';
 import {RecoilRoot, useRecoilState} from 'recoil';
 import { CookiesProvider } from 'react-cookie';
 import styled, {ThemeProvider } from 'styled-components';
-import { dark, light } from './component/theme/theme';
+import { dark, light } from '../src/theme/theme';
 import { IsDarkModeState } from './state/recoil';
 
 const App = () => {
   const [isdarkMode, setIsdarkMode] = useRecoilState<boolean>(IsDarkModeState);
-  const theme = isdarkMode ? light : dark;
+  const theme = isdarkMode ? dark : light;
 
   return (
     <ThemeProvider theme={theme}>

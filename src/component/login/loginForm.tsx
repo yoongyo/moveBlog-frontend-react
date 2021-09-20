@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../../api/backendURL';
 import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
-import { setCookie } from '../cookie/cookie';
+import { setCookie } from '../../cookie/cookie';
 
 
 interface IFormValues {

@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import { BACKEND_URL } from '../../api/backendURL';
 import { useRecoilState } from 'recoil';
 import { IsDarkModeState } from '../../state/recoil';
-import { getCookie } from '../cookie/cookie';
+import { getCookie } from '../../cookie/cookie';
 import { useHistory } from 'react-router-dom';
+import { COLORS } from '../../colors/color';
+
 
 interface IProps {
     postId: number
@@ -51,11 +53,11 @@ export const CommentForm = ({ postId, comments, setComments }:any) => {
     }
 
     return (
-        <div className="my-10">
+        <div className="mt-4 mb-12">
             <div className="border border-b p-3 rounded-tl-md rounded-tr-md">
                 <h1 className="mb-3">댓글 쓰기</h1>
                 {isDarkMode ? (
-                    <textarea className="w-full h-18 p-2 text-black" onChange={onChange} value={content} style={{backgroundColor: "#121212"}}/>
+                    <textarea className="w-full h-18 p-2 text-black border rounded-md" onChange={onChange} value={content} style={{backgroundColor: COLORS.darkBackground}}/>
                 ): (
                     <textarea className="w-full h-18 p-2 text-black" onChange={onChange} value={content}/>
                 )}

@@ -8,5 +8,5 @@ export const CategoryListState = atom<Object[]>({
 
 export const IsDarkModeState = atom<boolean>({
     key: "IsDarkModeState",
-    default: false
+    default: localStorage.getItem("darkMode") === "true"
 })

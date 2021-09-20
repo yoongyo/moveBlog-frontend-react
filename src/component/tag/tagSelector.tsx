@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { BACKEND_URL } from '../../api/backendURL';
 import plusIcon from '../../img/plus_icon.svg';
 import { Fade } from '@material-ui/core';
-import { getCookie } from '../cookie/cookie';
+import { getCookie } from '../../cookie/cookie';
 
 
 export const TagSelector = (props: any) => { 
