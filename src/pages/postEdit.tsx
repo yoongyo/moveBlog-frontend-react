@@ -4,27 +4,25 @@ import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import Header from '../component/layout/header';
-import { WysiwygEditor } from '../component/wysiwygEditor';
-import { TagSelector } from '../component/tagSelector';
+import { WysiwygEditor } from '../component/wysiwygEditor/wysiwygEditor';
+import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
-import { getCookie } from '../component/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 
 
 export const PostEdit = () => {
     const param:any = useParams();
     const postId = param.post_id
 
-    const [title, setTitle] = useState<string | null>(null);
-    const [subTitle, setSubTitle] = useState<string | null>(null);
-    const [content, setContent] = useState<string | null>(null);
+    const [title, setTitle] = useState<string>("");
+    const [subTitle, setSubTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
     const [tags, setTags] = useState<[]>([]);
 
     const [errorTitle, setErrorTitle] = useState<string>('');
     const [errorSubTitle, setErrorSubTitle] = useState<string>('');
     const [errorContent, setErrorContent] = useState<string>('');
     const [errorTags, setErrorTags] = useState<string>('');
-
-    const [post, setPost] = useState();
 
     let history = useHistory();
     
@@ -37,8 +35,10 @@ export const PostEdit = () => {
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json);
-            setPost(json.data);
+            const post = json.data;
+            setTitle(post.title);
+            setSubTitle(post.subTitle);
+            setContent(post.content);
         })
     }, [])
     
@@ -71,13 +71,13 @@ export const PostEdit = () => {
     }
 
     const nullCheck = () => {
-        if (title === null) {
+        if (title === "") {
             setErrorTitle("제목을 입력해주세요")
         }
-        if (subTitle === null) {
+        if (subTitle === "") {
             setErrorSubTitle("부 제목을 입력해주세요")
         }
-        if (content === null) {
+        if (content === "") {
             setErrorContent("본문을 입력해주세요")
         }
         if (tags.length === 0) {
@@ -94,6 +94,7 @@ export const PostEdit = () => {
                         <input 
                             className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
                             placeholder="제목" 
+                            value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                         {errorTitle && <p className="text-red-600 text-sm">{errorTitle}</p>}
@@ -101,13 +102,14 @@ export const PostEdit = () => {
                     <div className="pt-12">
                         <input 
                             className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
-                            placeholder="부 제목" 
+                            placeholder="부 제목"
+                            value={subTitle} 
                             onChange={(e) => setSubTitle(e.target.value)}
                         />
                         {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
                     </div>
                     <div className="pt-16"> 
-                        <WysiwygEditor setContent={setContent}/>
+                        <WysiwygEditor setContent={setContent} content={content}/>
                         {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
                     </div>
 

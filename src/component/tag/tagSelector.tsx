@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'; 
 import Select from 'react-select'; 
-import { BACKEND_URL } from '../api/backendURL';
-import plusIcon from '../img/plus_icon.svg';
+import { BACKEND_URL } from '../../api/backendURL';
+import plusIcon from '../../img/plus_icon.svg';
 import { Fade } from '@material-ui/core';
-import { getCookie } from './cookie/cookie';
+import { getCookie } from '../../cookie/cookie';
+
 
 export const TagSelector = (props: any) => { 
     const [fade, setFade] = useState(false);
@@ -72,7 +73,7 @@ export const TagSelector = (props: any) => {
         <Fade in={fade} disableStrictModeCompat={true}>
             <div>
                 <input className="border rounded-md mt-3 py-1 px-2" onChange={(e) => setTagInput(e.target.value)} value={tagInput}/>
-                <button className="bg-primary border-secondary text-white py-1 px-4 ml-3 font-bold text-md" type="button" onClick={createTag} >Add</button>
+                <button className="bg-primary border-secondary py-1 px-4 ml-3 font-bold text-md text-fakeWhite" type="button" onClick={createTag} >Add</button>
             </div>
         </Fade>
         </>

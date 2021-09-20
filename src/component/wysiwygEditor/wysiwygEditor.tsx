@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
-import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import React, {useState, useEffect} from 'react';
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-js';
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from 'draftjs-to-html';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import '../styles/editorStyle.css';
+import '../../styles/editorStyle.css';
 
 
 
 export const WysiwygEditor = (props:any) => {
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+
+    // if (props.content) {
+    //     const content = convertFromHTML(props.content);
+    //     setEditorState(EditorState.createWithContent(
+    //         ContentState.createFromBlockArray(content.contentBlocks, content.entityMap)
+    //     ))
+    // }
 
     // const uploadImageCallBack = (file:any) => {
     //     // long story short, every time we upload an image, we
@@ -37,6 +44,7 @@ export const WysiwygEditor = (props:any) => {
     //       }
     //     );
     //   }
+    
     return (
         <Editor
             placeholder="본문을 적어주세요"

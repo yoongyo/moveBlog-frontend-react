@@ -4,13 +4,17 @@ import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import Header from '../component/layout/header';
-import { WysiwygEditor } from '../component/wysiwygEditor';
-import { TagSelector } from '../component/tagSelector';
+import { WysiwygEditor } from '../component/wysiwygEditor/wysiwygEditor';
+import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
-import { getCookie } from '../component/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
+import { useRecoilState } from 'recoil';
+import { IsDarkModeState } from '../state/recoil';
 
 
 export const PostCreate = () => {
+    const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(IsDarkModeState);
+
     const [title, setTitle] = useState<string | null>(null);
     const [subTitle, setSubTitle] = useState<string | null>(null);
     const [content, setContent] = useState<string | null>(null);
@@ -27,6 +31,7 @@ export const PostCreate = () => {
         if (!getCookie('jwt')) {
             history.push('login')
         }
+        setIsDarkMode(false);
     }, [])
     
     const onClick = () => {
@@ -104,7 +109,7 @@ export const PostCreate = () => {
 
                     <div className="buttons flex my-1 py-3">
                         <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"><Link to="/">Cancel</Link></button>
-                        <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Post</button>
+                        <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary text-fakeWhite" type="button" onClick={onClick}>Post</button>
                     </div>
                 </form>
             </div>

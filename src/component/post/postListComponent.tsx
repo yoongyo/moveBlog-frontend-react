@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { DateFormat } from './dateTime/dateFormat';
-import { TagComponent } from './tagComponent';
+import { DateFormat } from '../dateTime/dateFormat';
+import { TagComponent } from '../tag/tagComponent';
 
 
 
@@ -20,8 +20,8 @@ export const PostListComponent = ({post}:any) => {
                 </div>
             </Link>
             <div className="my-6 flex flex-row flex-wrap">
-                {post.postTags.map((tag:any) => (
-                    <TagComponent tag={tag}/>
+                {post.postTags.map((tag:any, index:any) => (
+                    <TagComponent tag={tag} key={index}/>
                 ))}
             </div>
         </div>

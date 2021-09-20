@@ -5,11 +5,12 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { DateFormat } from '../component/dateTime/dateFormat';
 import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 import { Footer } from '../component/layout/footer';
-import { TagComponent } from '../component/tagComponent';
+import { TagComponent } from '../component/tag/tagComponent';
 import { Comments } from '../component/comment/comments';
-import { getCookie } from '../component/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 
 interface ILocation {
@@ -44,7 +45,6 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 setPost(json.data);
             })
         } else {
@@ -53,18 +53,28 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                console.log(json)
                 setPost(json.data);
             })
         }
     }, []) 
 
     const onClickDelete = () => {
-
-    }
-
-    const onClickEdit = () => {
-        history.push('/edit/'+post.id)
+        let ok = window.confirm("정말 이 게시물을 삭제하시겠습니까?")
+        if (ok) {
+            fetch(BACKEND_URL + '/posts' + pathName, {
+                method: 'DELETE',
+                headers: {
+                    'X-AUTH-TOKEN' : getCookie('jwt')
+                }
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json.success) {
+                    history.push('/');
+                }
+            })
+        }
     }
 
     return (
@@ -82,20 +92,20 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                     <div className="w-full" dangerouslySetInnerHTML={{ __html: post.content }}/>
                 </div>
                 <div className="flex flex-row flex-wrap">
-                    {post.postTags.map(tag => (
-                        <TagComponent tag={tag}/>
+                    {post.postTags.map((tag, index) => (
+                        <TagComponent tag={tag} key={index}/>
                     ))}
                 </div>
                 {post.authority && (
                     <div className="flex flex-row-reverse mt-8">
-                        <button className="py-2 px-3 bg-primary text-white rounded-md ml-2">
+                        <button className="py-2 px-3 rounded-md ml-2 bg-primary text-fakeWhite " onClick={onClickDelete}>
                             삭제
                         </button>
-                        <Link to={'/edit/'+post.id} className="py-2 px-3 bg-primary text-white rounded-md">수정</Link>
+                        <Link to={'/edit/'+post.id} className="py-2 px-3 rounded-md bg-primary text-fakeWhite">수정</Link>
                     </div>
                 )}
             </div>
-            <Comments postId={post.id}/>
+            <Comments/>
             <Footer/>
         </div>
     )

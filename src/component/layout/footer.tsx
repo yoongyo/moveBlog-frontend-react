@@ -4,7 +4,7 @@ import React from 'react';
 export const Footer = () => {
     return (
         <div className="py-8 bg-primary w-full text-center">
-            <div className="max-w-5xl mx-auto text-white mb-10">
+            <div className="max-w-5xl mx-auto text-fakeWhite mb-10">
                 <div className="grid text-sm gap-4 grid-cols-2 sm:grid-rows-1 sm:grid-flow-col sm:grid-cols-6 sm:text-base">
                     <div>
                         <a href="http://move.is/" className=" hover:underline">
@@ -45,7 +45,7 @@ export const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="mx-auto text-white text-center text-sm bg-primary">
+            <div className="mx-auto text-white text-center text-sm bg-primary text-fakeWhite">
                 <h1>© 2000-2021 Move Inc.</h1>
                 <h1>orbisoptimus</h1>
             </div>
