@@ -7,7 +7,8 @@ export const MarkDownEditor = ({setContent, content}: any) => {
     return (
         <MDEditor
             value={content}
-            onChange={(val) => setContent(val!)}    
+            onChange={(val) => setContent(val!)}  
+            preview={'edit'} 
         />
     )
 }
