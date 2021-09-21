@@ -2,15 +2,15 @@ import React, {useEffect, useState} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import Header from '../component/layout/header';
 import { Link, RouteComponentProps } from "react-router-dom";
-import { DateFormat } from '../component/dateTime/dateFormat';
 import { DateTimeFormat } from '../component/dateTime/datetimeFormat';
 import { Footer } from '../component/layout/footer';
 import { TagComponent } from '../component/tag/tagComponent';
 import { Comments } from '../component/comment/comments';
 import { getCookie } from '../cookie/cookie';
-import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, ContentState, convertToRaw, convertFromHTML, convertFromRaw } from 'draft-js';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 
 interface ILocation {
@@ -32,7 +32,7 @@ interface IPost {
 export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> =  ({location}) => {
     const pathName = location.pathname;
     const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:""}, postTags: [], authority: false});
-
+    const [wysiwygContent, setWysiwygContent ] = useState("");
     let history = useHistory();
 
     useEffect(() => {
@@ -77,6 +77,8 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
         }
     }
 
+    const fu = "<blockquote>adfadfadsfasdafsafds</blockquote>"
+
     return (
         <div className="flex flex-col min-h-screen">
             <Header/>
@@ -89,7 +91,7 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                         <DateTimeFormat datetime={post.createdDate}/>
                         <p className="ml-3">{post.author.name}</p>
                     </div>
-                    <div className="w-full" dangerouslySetInnerHTML={{ __html: post.content }}/>
+                    <MarkdownPreview source={post.content!}/>
                 </div>
                 <div className="flex flex-row flex-wrap">
                     {post.postTags.map((tag, index) => (
@@ -104,8 +106,8 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                         <Link to={'/edit/'+post.id} className="py-2 px-3 rounded-md bg-primary text-fakeWhite">수정</Link>
                     </div>
                 )}
+                <Comments/>
             </div>
-            <Comments/>
             <Footer/>
         </div>
     )

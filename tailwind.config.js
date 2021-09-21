@@ -16,6 +16,7 @@ module.exports = {
     textColor: theme => ({
       'primary': '#2A3F54',
       'fakeWhite': '#FFFFFE',
+      'fakeBlack': '#010000',
       'danger': '#e3342f',
     })
     

@@ -16,23 +16,16 @@ export const MainRouter = () => {
     return (
         <Router>
             <Switch>
-                <Route path="/create">
-                    {/* {account ? (
-                        <PostCreate/>
-                    ): (
-                        <Redirect to={{pathname: '/login'}}/>
-                    )} */}
-                    <PostCreate/>
-                </Route>
-                <Route path="/tag/:name" component={Main}/>
-                <Route path="/admin/:name" component={Admin}/>
                 <Route path="/admin" component={Admin}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/signup" component={Signup}/>
-                <Route path="/profile" component={Profile}/>
-                <Route path="/" exact component={Main}/>
-                <Route path="/addCategory" component={AddCategory}/>
+                <Route path="/create" exact component={PostCreate}/>
                 <Route path="/edit/:post_id" component={PostEdit}/>
+                <Route path="/" exact component={Main}/>
+                <Route path="/tag/:name" component={Main}/>
+                <Route path="/admin/:name" component={Admin}/>
+                <Route path="/profile" component={Profile}/>
+                <Route path="/addCategory" component={AddCategory}/>
                 <Route path="/:post_id" component={PostDetail}/>
             </Switch>
         </Router>

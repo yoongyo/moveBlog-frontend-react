@@ -1,6 +1,6 @@
 import React from 'react';
 import { DrawerNavigation } from '../nav/drawerNavigation'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import BlackLogo from '../../img/blackLogo.png';
 import WhiteLogo from '../../img/logo.png';
 import Cookies from 'universal-cookie';
@@ -9,7 +9,11 @@ import { DarkModeBtn } from '../button/darkModeBtn';
 import { useRecoilState } from 'recoil';
 import { IsDarkModeState } from '../../state/recoil';
 
+
+
+
 const Header = () => {
+
     const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(IsDarkModeState);
     let Logo = "";
     if (isDarkMode) {
@@ -35,7 +39,7 @@ const Header = () => {
                         <p className="text-xl sm:text-2xl font-bold box-content mx-2">MOVE</p> 
                         <p className="text-lg sm:text-lg font-bold self-center" style={{color: '#c0c0c0', 'fontWeight': 500}}>기술블로그</p>
                     </div>
-                    <DarkModeBtn />
+                    <DarkModeBtn/>
                 </div>  
             </div>
         </div>

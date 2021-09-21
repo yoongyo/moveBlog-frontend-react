@@ -7,12 +7,13 @@ export const DarkModeBtn = () => {
     const [themeMode, setThemeMode] = useRecoilState<boolean>(IsDarkModeState);
 
 	const onChange = () => {
-		setThemeMode(!themeMode);
 		if (themeMode) {
 			localStorage.setItem("darkMode", "false")
 		} else {
 			localStorage.setItem("darkMode", "true")
 		}
+		setThemeMode(!themeMode);
+
 	}
 
     return (

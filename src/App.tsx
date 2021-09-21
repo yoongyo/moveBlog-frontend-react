@@ -4,7 +4,7 @@ import { MainRouter } from './routers/MainRouter';
 import {RecoilRoot, useRecoilState} from 'recoil';
 import { CookiesProvider } from 'react-cookie';
 import styled, {ThemeProvider } from 'styled-components';
-import { dark, light } from '../src/theme/theme';
+import { dark, DarkModeDiv, light } from '../src/theme/theme';
 import { IsDarkModeState } from './state/recoil';
 
 const App = () => {
@@ -14,9 +14,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
         <CookiesProvider>
-          <S.Main>
-            <MainRouter/>
-          </S.Main>
+            <DarkModeDiv>
+              <MainRouter/>
+            </DarkModeDiv>
         </CookiesProvider>
     </ThemeProvider>
   )
@@ -26,10 +26,4 @@ const App = () => {
 export default App;
 
 
-const S:any = {};
-S.Main = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${props => props.theme.colors.bgColor};
-  color: ${props => props.theme.colors.text};
-`;
+

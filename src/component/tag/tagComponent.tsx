@@ -9,7 +9,7 @@ export const TagComponent = ({tag}:any) => {
 
     return (
         <div className="mb-2 mr-3">
-            <button className="bg-primary px-3 hover:opacity-75 rounded-md text-fakeWhite">
+            <button className="bg-primary px-3 hover:opacity-75 rounded-xl text-fakeWhite">
                 <a href={"/?tag="+tag.tagName}>#{tag.tagName}</a>
             </button>
         </div>
