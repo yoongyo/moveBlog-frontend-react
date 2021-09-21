@@ -30,9 +30,10 @@ export const LoginForm = (props:any) => {
         .then(data => {
             if (data.success) {
                 history.push("/");
-                setCookie('jwt', data.data)
+                setCookie('jwt', data.data);
+                // setCookie('loginId', data);
             } else{
-                setLoginError(data.msg)
+                setLoginError(data.msg);
             }
         })
     }

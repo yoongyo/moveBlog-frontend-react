@@ -24,43 +24,29 @@ interface IPost {
     content: string,
     createdDate: string,
     author: {
-        name: ""
+        name: "",
+        loginId: ""
     },
     postTags: []
-    authority :boolean;
 }
 
 export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> =  ({location}) => {
     const pathName = location.pathname;
-    const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:""}, postTags: [], authority: false});
+    const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:"", loginId: ""}, postTags: []});
     const [wysiwygContent, setWysiwygContent ] = useState("");
     const [loading, setLoading] = useState(true);
     let history = useHistory();
 
     useEffect(() => {
-        if (getCookie('jwt')) {
-            fetch(BACKEND_URL + '/posts' + pathName+'/login', {
-                method: 'GET',            
-                headers: {
-                    'X-AUTH-TOKEN': getCookie('jwt')                    
-                },
-            })
-            .then(res => res.json())
-            .then(json => {
-                setPost(json.data);
-                setLoading(false);
-            })
-        } else {
-            fetch(BACKEND_URL + '/posts' + pathName, {
-                method: 'GET',            
-            })
-            .then(res => res.json())
-            .then(json => {
-                console.log(json)
-                setPost(json.data);
-                setLoading(false);
-            })
-        }
+        fetch(BACKEND_URL + '/posts' + pathName, {
+            method: 'GET',            
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            setPost(json.data);
+            setLoading(false);
+        })
     }, []) 
 
     const onClickDelete = () => {
@@ -91,25 +77,27 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                     </div>
                 ):(
                     <div>
-                        <div className="border-b">
-                            <h1 className="font-bold text-3xl py-5">{post.title}</h1>
-                        </div>
-                        <div className="py-12">
-                            <div className="flex flex-row mb-4">
-                                <DateTimeFormat datetime={post.createdDate}/>
-                                <p className="ml-3">{post.author.name}</p>
+                        <div className="mb-8">
+                            <div className="border-b">
+                                <h1 className="font-bold text-3xl py-5">{post.title}</h1>
                             </div>
-                            <div className="">
-                                <MarkdownPreview source={post.content!}/>
+                            <div className="py-12">
+                                <div className="flex flex-row mb-4">
+                                    <DateTimeFormat datetime={post.createdDate}/>
+                                    <p className="ml-2">{post.author.name}</p>
+                                </div>
+                                <div className="overflow-auto">
+                                    <MarkdownPreview source={post.content!}/>
+                                </div>
+                            </div>
+                            <div className="flex flex-row flex-wrap">
+                                {post.postTags.map((tag, index) => (
+                                    <TagComponent tag={tag} key={index}/>
+                                ))}
                             </div>
                         </div>
-                        <div className="flex flex-row flex-wrap">
-                            {post.postTags.map((tag, index) => (
-                                <TagComponent tag={tag} key={index}/>
-                            ))}
-                        </div>
-                        {post.authority && (
-                            <div className="flex flex-row-reverse mt-8">
+                        {post.author.loginId === getCookie("loginId") && (
+                            <div className="flex flex-row-reverse">
                                 <button className="py-2 px-3 rounded-md ml-2 bg-primary text-fakeWhite " onClick={onClickDelete}>
                                     삭제
                                 </button>
@@ -117,6 +105,13 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                             </div>
                         )}
                         <Comments/>
+                        <div className="px-3">
+                            <Link to="/">
+                                <button className="w-full py-3 bg-primary text-fakeWhite rounded-md">
+                                    목록으로 돌아가기
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 )}
             </div>

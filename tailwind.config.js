@@ -10,10 +10,11 @@ module.exports = {
     borderColor: theme => ({
       ...theme('colors'),
        DEFAULT: theme('colors.gray.300', 'currentColor'),
-      'primary': '#202020',
+      'primary': '#2A3F54',
       'secondary': '#334257',
     }),
     textColor: theme => ({
+      ...theme('colors'),
       'primary': '#2A3F54',
       'fakeWhite': '#FFFFFE',
       'fakeBlack': '#010000',
