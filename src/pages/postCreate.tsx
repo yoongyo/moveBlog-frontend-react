@@ -4,12 +4,14 @@ import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import Header from '../component/layout/header';
-import { WysiwygEditor } from '../component/wysiwygEditor/wysiwygEditor';
+import { WysiwygEditor } from '../component/editor/wysiwygEditor';
 import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
 import { getCookie } from '../cookie/cookie';
 import { useRecoilState } from 'recoil';
 import { IsDarkModeState } from '../state/recoil';
+import { MarkDownEditor } from '../component/editor/markdownEditor';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 
 export const PostCreate = () => {
@@ -31,7 +33,6 @@ export const PostCreate = () => {
         if (!getCookie('jwt')) {
             history.push('login')
         }
-        setIsDarkMode(false);
     }, [])
     
     const onClick = () => {
@@ -56,11 +57,11 @@ export const PostCreate = () => {
         })
     }
 
-    const onKeyDown = (keyEvent:any) => {
-        if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
-            keyEvent.preventDefault();
-        }
-    }
+    // const onKeyDown = (keyEvent:any) => {
+    //     if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+    //         keyEvent.preventDefault();
+    //     }
+    // }
 
     const nullCheck = () => {
         if (title === null) {
@@ -81,7 +82,7 @@ export const PostCreate = () => {
         <div className="flex flex-col min-h-screen">
             <Header/>
             <div className="max-w-4xl mx-auto py-12 flex-1 w-full px-6">
-                <form onKeyDown={onKeyDown}>
+                <form >
                     <div className="pt-12">
                         <input 
                             className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
@@ -99,10 +100,15 @@ export const PostCreate = () => {
                         {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
                     </div>
                     <div className="pt-16"> 
-                        <WysiwygEditor setContent={setContent}/>
+                        <MarkDownEditor setContent={setContent} content={content}/>
                         {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
                     </div>
-
+                    <div>
+                        <h1 className="my-10 text-lg font-bold">Preview</h1> 
+                        <div className="mb-12">
+                            <MarkdownPreview source={content!}/>
+                        </div>
+                    </div>
                     <div className="mt-5">
                         <TagSelector setTags={setTags} tags={tags} errorTags={errorTags}/>
                     </div>

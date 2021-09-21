@@ -26,6 +26,8 @@
     "@types/react-select": "^4.0.17",
     "@types/sass": "^1.16.1",
     "@types/styled-components": "^5.1.14",
+    "@uiw/react-markdown-preview": "^3.3.3",
+    "@uiw/react-md-editor": "^3.6.4",
     "autoprefixer": "^10.3.3",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",

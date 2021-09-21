@@ -28,11 +28,11 @@ export const TagList = (props:any) => {
                 {tags.map((tag:any, index) => (
                     <div className="mb-2" key={index}>
                         {tag.name === props.tag ? (
-                            <button className="bg-primary px-3 hover:opacity-75 rounded-md" onClick={onClick} value={tag["id"]}>
+                            <button className="bg-primary px-3 hover:opacity-75 rounded-xl" onClick={onClick} value={tag["id"]}>
                                 <a href={"/?tag="+tag.name}>#{tag.name}</a>
                             </button>
                         ):(
-                           <button className="bg-primary px-3 hover:opacity-75 rounded-md" onClick={onClick} value={tag["id"]}>
+                           <button className="bg-primary px-3 hover:opacity-75 rounded-xl" onClick={onClick} value={tag["id"]}>
                                 <a href={"/?tag="+tag.name}>#{tag.name}</a>                               
                             </button>
                             )

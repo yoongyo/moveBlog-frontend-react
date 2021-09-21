@@ -39,7 +39,7 @@ export const LoginForm = (props:any) => {
 
 
     return (
-        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white ">
+        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input 
                     className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
@@ -49,7 +49,7 @@ export const LoginForm = (props:any) => {
                     })}
                 />
                 <input 
-                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
+                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none"
                     placeholder="비밀번호"   
                     {...register("password", {
                         required: true,

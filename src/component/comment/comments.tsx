@@ -12,7 +12,6 @@ export const Comments = () => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        console.log("fuck")
         fetch(BACKEND_URL + '/comments/'+postId, {
             method: 'GET',
         })

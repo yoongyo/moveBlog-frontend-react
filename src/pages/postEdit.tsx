@@ -4,7 +4,7 @@ import  '../styles/editorStyle.css'
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
 import Header from '../component/layout/header';
-import { WysiwygEditor } from '../component/wysiwygEditor/wysiwygEditor';
+import { WysiwygEditor } from '../component/editor/wysiwygEditor';
 import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
 import { getCookie } from '../cookie/cookie';
