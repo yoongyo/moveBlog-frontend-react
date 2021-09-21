@@ -57,7 +57,7 @@ export const CommentForm = ({ postId, comments, setComments }:any) => {
             <div className="border border-b p-3 rounded-tl-md rounded-tr-md">
                 <h1 className="mb-3">댓글 쓰기</h1>
                 {isDarkMode ? (
-                    <textarea className="w-full h-18 p-2 text-black border rounded-md" onChange={onChange} value={content} style={{backgroundColor: COLORS.darkBackground}}/>
+                    <textarea className="w-full h-18 p-2 text-black border rounded-md" onChange={onChange} value={content} style={{backgroundColor: COLORS.darkBackground, color: 'white'}}/>
                 ): (
                     <textarea className="w-full h-18 p-2 text-black" onChange={onChange} value={content}/>
                 )}
