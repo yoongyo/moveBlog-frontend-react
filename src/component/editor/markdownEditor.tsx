@@ -9,6 +9,7 @@ export const MarkDownEditor = ({setContent, content}: any) => {
             value={content}
             onChange={(val) => setContent(val!)}  
             preview={'edit'} 
+            height={600}
         />
     )
 }

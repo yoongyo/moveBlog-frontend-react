@@ -29,8 +29,6 @@ export const CommentForm = ({ postId, comments, setComments }:any) => {
             })
             .then(res => res.json())
             .then(json => {
-                console.log("여기입니다.!!")
-                console.log(json);
                 setComments([...comments, json.data]);
                 setContent("");
             })
@@ -56,11 +54,11 @@ export const CommentForm = ({ postId, comments, setComments }:any) => {
         <div className="mt-4 mb-12">
             <div className="border border-b p-3 rounded-tl-md rounded-tr-md">
                 <h1 className="mb-3">댓글 쓰기</h1>
-                {isDarkMode ? (
-                    <textarea className="w-full h-18 p-2 text-black border rounded-md" onChange={onChange} value={content} style={{backgroundColor: COLORS.darkBackground, color: 'white'}}/>
-                ): (
-                    <textarea className="w-full h-18 p-2 text-black" onChange={onChange} value={content}/>
-                )}
+                    <textarea className="w-full h-18 p-2 text-black border rounded-md" 
+                        onChange={onChange} 
+                        value={content} 
+                        style={isDarkMode ? {backgroundColor: COLORS.darkBackground, color: 'white'} : {}}
+                    />
             </div>
             <div className="flex border border-t-0 rounded-bl-md rounded-br-md p-3">
                 <div className="my-auto">

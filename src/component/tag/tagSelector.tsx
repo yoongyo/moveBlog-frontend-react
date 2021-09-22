@@ -11,7 +11,6 @@ export const TagSelector = (props: any) => {
     const [options, setOptions] = useState<any>([]);
     const [tagInput, setTagInput] = useState("");
     
-
     useEffect(() => {
         fetch(BACKEND_URL + '/tags', {
             method: 'GET',

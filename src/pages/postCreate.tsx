@@ -107,8 +107,8 @@ export const PostCreate = () => {
                     {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
                 </div>
                 <div className="pt-16"> 
-                    {/* <MarkDownEditor setContent={setContent} content={content}/> */}
-                    <WysiwygEditor setContent={setContent}/>
+                    <MarkDownEditor setContent={setContent} content={content}/>
+                    {/* <WysiwygEditor setContent={setContent}/> */}
                     {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
                 </div>
                 <div>

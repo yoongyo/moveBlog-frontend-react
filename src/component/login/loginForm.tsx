@@ -16,6 +16,8 @@ export const LoginForm = (props:any) => {
     const [loginError, setLoginError] = useState<String>("");
     const { register, handleSubmit, watch, formState: {errors}} = useForm();
 
+    const now = new Date();
+    const expireTime = now.setDate(now.getDate() + 7);  // 일주일뒤 만료
 
     const onSubmit: SubmitHandler<IFormValues> = () => {
         console.log(watch())
@@ -31,7 +33,7 @@ export const LoginForm = (props:any) => {
             if (data.success) {
                 history.push("/");
                 setCookie('jwt', data.data);
-                // setCookie('loginId', data);
+                setCookie('loginId', watch().loginId);
             } else{
                 setLoginError(data.msg);
             }
@@ -43,14 +45,14 @@ export const LoginForm = (props:any) => {
         <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input 
-                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none" 
+                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none text-fakeBlack" 
                     placeholder="아이디"   
                     {...register("loginId", {
                         required: true,
                     })}
                 />
                 <input 
-                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none"
+                    className="bg-gray-200 rounded-full w-full h-10 px-4 mb-3 outline-none text-fakeBlack"
                     placeholder="비밀번호"   
                     {...register("password", {
                         required: true,

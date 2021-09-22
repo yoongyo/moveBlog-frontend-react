@@ -26,7 +26,7 @@ export const Comments = () => {
         <div className="max-w-4xl mx-auto w-full px-3 mb-4">
             <p>댓글 {comments.length}</p>
             {comments.map((comment) => (
-                <CommentComponent comment={comment}/>
+                <CommentComponent comment={comment} comments={comments} setComments={setComments}/>
             ))}
             <CommentForm postId={postId} comments={comments} setComments={setComments}/>
         </div>
