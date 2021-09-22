@@ -23,6 +23,7 @@ interface IPost {
     title: string,
     content: string,
     createdDate: string,
+    updatedDate: string,
     author: {
         name: "",
         loginId: ""
@@ -32,7 +33,7 @@ interface IPost {
 
 export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> =  ({location}) => {
     const pathName = location.pathname;
-    const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", author: {name:"", loginId: ""}, postTags: []});
+    const [post, setPost] = useState<IPost>({id: 0, title: "", content: "", createdDate: "", updatedDate:"", author: {name:"", loginId: ""}, postTags: []});
     const [wysiwygContent, setWysiwygContent ] = useState("");
     const [loading, setLoading] = useState(true);
     let history = useHistory();
@@ -86,6 +87,9 @@ export const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>
                                 <div className="flex flex-row mb-4">
                                     <DateTimeFormat datetime={post.createdDate}/>
                                     <p className="ml-2">{post.author.name}</p>
+                                    {post.createdDate !== post.updatedDate &&
+                                        <button className="ml-1">(편집됨)</button>
+                                    }
                                 </div>
                                 <div className="overflow-auto">
                                     <MarkdownPreview source={post.content!}/>
