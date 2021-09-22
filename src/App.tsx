@@ -8,8 +8,8 @@ import { dark, DarkModeDiv, light } from '../src/theme/theme';
 import { IsDarkModeState } from './state/recoil';
 
 const App = () => {
-  const [isdarkMode, setIsdarkMode] = useRecoilState<boolean>(IsDarkModeState);
-  const theme = isdarkMode ? dark : light;
+  const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(IsDarkModeState);
+  const theme = isDarkMode ? dark : light;
 
   return (
     <ThemeProvider theme={theme}>

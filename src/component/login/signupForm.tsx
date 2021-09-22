@@ -44,7 +44,6 @@ export const SignupForm = (props:any) => {
             if(data.success) {
                 history.push("login")
             } 
-            console.log(data)
         })
     }
     const password = useRef({});
@@ -52,7 +51,7 @@ export const SignupForm = (props:any) => {
 
 
     return (
-        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white">
+        <div className="mx-auto w-72 rounded-lg shadow-lg h-76 py-12 px-6 z-10 bg-white text-fakeBlack">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input label="loginId" labelText="아이디" register={register} required placeholder="아이디"/>
 
@@ -75,7 +74,7 @@ export const SignupForm = (props:any) => {
                 <div className="mt-3">
                     <label className="text-sm">비밀번호 확인</label>
                     <input
-                        className="bg-gray-200 rounded-full w-full h-10 px-4 outline-none"
+                        className="bg-gray-200 rounded-full w-full h-10 px-4 outline-none "
                         placeholder="비밀번호 확인"
                         {...register("cPassword", { 
                             validate: value => value === password.current || "The passwords do not match"

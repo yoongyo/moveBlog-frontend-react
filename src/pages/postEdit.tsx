@@ -8,11 +8,13 @@ import { WysiwygEditor } from '../component/editor/wysiwygEditor';
 import { TagSelector } from '../component/tag/tagSelector';
 import { Footer } from '../component/layout/footer';
 import { getCookie } from '../cookie/cookie';
+import { MarkDownEditor } from '../component/editor/markdownEditor';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 
 export const PostEdit = () => {
     const param:any = useParams();
-    const postId = param.post_id
+    const postId = param.post_id;
 
     const [title, setTitle] = useState<string>("");
     const [subTitle, setSubTitle] = useState<string>("");
@@ -28,7 +30,7 @@ export const PostEdit = () => {
     
     useEffect(() => {
         if (!getCookie('jwt')) {
-            history.push('login')
+            history.push('login');
         }
         fetch(BACKEND_URL + '/posts/' + postId, {
             method: 'GET',            
@@ -39,6 +41,7 @@ export const PostEdit = () => {
             setTitle(post.title);
             setSubTitle(post.subTitle);
             setContent(post.content);
+            setTags(post.postTags);
         })
     }, [])
     
@@ -46,11 +49,11 @@ export const PostEdit = () => {
         nullCheck()
         const tagIdList:any = []
         tags.map((tag:any) => tagIdList.push(tag.value))
-        fetch(BACKEND_URL + '/posts', {
-            method: 'POST',
+        fetch(BACKEND_URL + '/posts/' + postId, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': getCookie('jwt')
+                // 'X-AUTH-TOKEN': getCookie('jwt')
             },
             body: JSON.stringify({title: title, subTitle: subTitle, content: content, tags: tagIdList})
         })
@@ -59,15 +62,10 @@ export const PostEdit = () => {
             if (json.success) {
                 history.push('/'+ json.data)
             } else {
+                console.log(json)
                 console.log("잘못된 접근입니다.")
             }
         })
-    }
-
-    const onKeyDown = (keyEvent:any) => {
-        if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
-            keyEvent.preventDefault();
-        }
     }
 
     const nullCheck = () => {
@@ -89,39 +87,43 @@ export const PostEdit = () => {
         <div className="flex flex-col min-h-screen">
             <Header/>
             <div className="max-w-4xl mx-auto py-12 flex-1 w-full px-6">
-                <form onKeyDown={onKeyDown}>
-                    <div className="pt-12">
-                        <input 
-                            className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
-                            placeholder="제목" 
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                        {errorTitle && <p className="text-red-600 text-sm">{errorTitle}</p>}
+                <div className="pt-12">
+                    <input 
+                        className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
+                        placeholder="제목" 
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    {errorTitle && <p className="text-red-600 text-sm">{errorTitle}</p>}
+                </div>
+                <div className="pt-12">
+                    <input 
+                        className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
+                        placeholder="부 제목"
+                        value={subTitle} 
+                        onChange={(e) => setSubTitle(e.target.value)}
+                    />
+                    {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
+                </div>
+                <div className="pt-16"> 
+                    <MarkDownEditor setContent={setContent} content={content}/>
+                    {/* <WysiwygEditor setContent={setContent} content={content}/> */}
+                    {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
+                </div>
+                <div>
+                    <h1 className="my-10 text-lg font-bold">Preview</h1> 
+                    <div className="mb-12 overflow-auto">
+                        <MarkdownPreview source={content!}/>
                     </div>
-                    <div className="pt-12">
-                        <input 
-                            className="w-full h-9 outline-none border-b focus:border-secondary hover:border-secondary" 
-                            placeholder="부 제목"
-                            value={subTitle} 
-                            onChange={(e) => setSubTitle(e.target.value)}
-                        />
-                        {errorSubTitle && <p className="text-red-600 text-sm">{errorSubTitle}</p>}
-                    </div>
-                    <div className="pt-16"> 
-                        <WysiwygEditor setContent={setContent} content={content}/>
-                        {errorContent && <p className="text-red-600 text-sm">{errorContent}</p>}
-                    </div>
+                </div>
+                <div className="mt-5">
+                    <TagSelector setTags={setTags} tags={tags} errorTags={errorTags}/>
+                </div>
 
-                    <div className="mt-5">
-                        <TagSelector setTags={setTags} tags={tags} errorTags={errorTags}/>
-                    </div>
-
-                    <div className="buttons flex my-1 py-3">
-                        <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"><Link to="/">Cancel</Link></button>
-                        <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Edit</button>
-                    </div>
-                </form>
+                <div className="buttons flex my-1 py-3">
+                    <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto"><Link to="/">Cancel</Link></button>
+                    <button className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-primary" type="button" onClick={onClick}>Edit</button>
+                </div>
             </div>
             <Footer/>
         </div>

@@ -35,11 +35,9 @@ export const Main = ({location}:any) => {
         .then(data => {
             data.reverse();
             if (tagQuery.tag) {
-                console.log(tagQuery.tag)
                 // 이건 진짜 유용하니까 
-                console.log(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
-                setAllPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
-                setPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.tagName === tagQuery.tag).includes(true)));
+                setAllPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.label === tagQuery.tag).includes(true)));
+                setPosts(data.filter((post:any) => post.postTags.map((tag:any) => tag.label === tagQuery.tag).includes(true)));
             } else {
                 setAllPosts(data);
                 setPosts(data.slice(0, pagination))

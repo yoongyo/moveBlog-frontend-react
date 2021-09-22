@@ -21,15 +21,11 @@ const Header = () => {
     } else {
         Logo = BlackLogo;
     }
-
-    const token = getCookie('jwt');
     return (
         <div className="border-b p-5 border-gray-200">
-            {token &&
-                <div className="absolute">
-                    <DrawerNavigation/>
-                </div>
-            }
+            <div className="absolute">
+                <DrawerNavigation/>
+            </div>
             <div className="sm:max-w-4xl sm:mx-auto sm:text-left">
                 <div className="flex flex-row justify-center lg:justify-between">
                     <div className="flex flex-row mr-6">
