@@ -49,10 +49,12 @@ export const PostCreate = () => {
             })
             .then(res => res.json())
             .then(json => {
+                console.log(json)
                 if (json.success) {
                     history.push('/'+ json.data)
                 } else {
-                    console.log("잘못된 접근입니다.")
+                    if (json.error === 'Forbidden')
+                    window.alert("글쓰기 권한이 없습니다.");
                 }
             })
         }
